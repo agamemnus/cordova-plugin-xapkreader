@@ -1,5 +1,6 @@
 package org.apache.cordova.xapkreader;
 
+import android.content.Context;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -19,6 +20,8 @@ import com.google.android.vending.expansion.downloader.IDownloaderClient;
 import com.google.android.vending.expansion.downloader.IDownloaderService;
 import com.google.android.vending.expansion.downloader.IStub;
 
+import java.io.File;
+
 public class XAPKDownloaderActivity extends Activity implements IDownloaderClient {
  private IStub mDownloaderClientStub;
  private IDownloaderService mRemoteService;
@@ -26,13 +29,21 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private static final String LOG_TAG = "XAPKDownloader";
  private Bundle xmlData;
  
- boolean allExpansionFilesDelivered (int[] versionList, long[] fileSizeList) {
+ // The file may have been delivered by Google Play --- let's make sure it exists and it's the size we expect.
+ static public boolean validateFile (Context ctx, String fileName, long fileSize, boolean checkFileSize) {
+  File fileForNewFile = new File(Helpers.generateSaveFileName(ctx, fileName));
+  if (!fileForNewFile.exists()) return false;
+  if ((checkFileSize == true) && (fileForNewFile.length() != fileSize)) return false;
+  return true;
+ }
+ 
+ boolean allExpansionFilesDelivered (int[] versionList, long[] fileSizeList, boolean[] checkFileSizeList) {
   for (int i = 0; i < 2; i++) {
    // If the version number is 0, consider it to be delivered.
    if (versionList[i] == 0) continue;
    String fileName = Helpers.getExpansionAPKFileName(this, (i == 0), versionList[i]);
    // If the file doesn't exist or has the wrong file size, consider the files to be undelivered.
-   if (!Helpers.doesFileExist(this, fileName, fileSizeList[i], false)) {
+   if (!validateFile(this, fileName, fileSizeList[i], checkFileSizeList[i])) {
     Log.e (LOG_TAG, "ExpansionAPKFile doesn't exist or has a wrong size (" + fileName + ").");
     return false;
    }
@@ -44,11 +55,11 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   super.onCreate (savedInstanceState);
   xmlData = savedInstanceState;
   
-  int [] versionList  = {this.getIntent().getIntExtra ("main_version"   , 0) , this.getIntent().getIntExtra ("patch_version"  ,  0)};
-  long[] fileSizeList = {this.getIntent().getLongExtra("main_file_size" , 0L), this.getIntent().getLongExtra("patch_file_size", 0L)};
-  
+  int [] versionList          = {this.getIntent().getIntExtra ("main_version"           ,     0), this.getIntent().getIntExtra ("patch_version"           ,     0)};
+  long[] fileSizeList         = {this.getIntent().getLongExtra("main_file_size"         ,    0L), this.getIntent().getLongExtra("patch_file_size"         ,    0L)};
+  boolean[] checkFileSizeList = {this.getIntent().getBooleanExtra("main_check_file_size", false), this.getIntent().getBooleanExtra("patch_check_file_size", false)};
   // Check if both expansion files are already available and downloaded before going any further.
-  if (allExpansionFilesDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
+  if (allExpansionFilesDelivered(versionList, fileSizeList, checkFileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
   
   // Download the expansion file(s).
   try {
