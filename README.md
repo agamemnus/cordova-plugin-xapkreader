@@ -6,6 +6,7 @@ Purpose
 
 Google Play limits APK file sizes to 50 megabytes. APK expansion files are their solution. This plugin allows you to more easily implement APK expansion files in Cordova, automating most of the things.
 
+
 Donations
 ----------
 
@@ -16,6 +17,18 @@ https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.premi
 
 Or ... if you can't afford $0.99 ..., maybe you could download the free version and rate it...:
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
+
+
+Tips
+-----
+
+* You can test your expansion files my adding them to Android/obb/, as described here:  http://developer.android.com/google/play/expansion-files.html#Testing
+
+* Unfortunately, you can't see the version number of your expansion files when you upload them to Google Play. The version number Google Play assigns will be equal to the version of the APK itself the first time you uploaded a new APK version.
+
+* If you upload a new main or patch APK expansion file to Google Play, the old main or patch file will be deleted when Google Play updates the user's device. Theoretically.
+
+* When you upload a new APK version, don't forget to check that your APK expansions are actually included. If you don't see them as included in the pop-up, they aren't -- sometimes Google Play will clear that information, so you have to select the APK expansion from the dropdown again. (that you already uploaded, assuming you uploaded one.)
 
 
 Downloading and Initial Install
