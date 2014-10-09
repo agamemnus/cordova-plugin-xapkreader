@@ -28,6 +28,7 @@ Completing Installation
   * [android-sdk]/extras/google/play_apk_expansion
   * [android-sdk]/extras/google/play_licensing
  
+ 
  2) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk
  folder to your ROOT directory:
 
