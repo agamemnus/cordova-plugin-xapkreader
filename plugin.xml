@@ -22,6 +22,8 @@
    <integer name="patch_version">1</integer>
    <integer name="main_file_size">123456</integer>
    <integer name="patch_file_size">0</integer>
+   <bool name="main_check_file_size">false</bool>
+   <bool name="patch_check_file_size"></bool>false</bool>
    <string name="google_play_public_key">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>
   </config-file>
   
