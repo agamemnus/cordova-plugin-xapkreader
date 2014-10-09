@@ -50,6 +50,8 @@ Completing Installation
  patch_version          : your file's patch version.
  main_file_size         : your main version's file size.
  patch_file_size        : your patch version's file size.
+ main_check_file_size   : boolean that is true if the plugin should validate the main file size against main_file_size.
+ patch_check_file_size  : boolean that is true if the plugin should validate the patch file size against patch_file_size.
  application_public_key : your application's Google Play public key.
 ````
 
