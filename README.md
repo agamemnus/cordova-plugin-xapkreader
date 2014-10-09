@@ -1,6 +1,5 @@
-cordova-plugin-xapkreader
+cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
 ================================================================
- (Agamemnus/Flyingsoft Games edition)
 
 Downloading and Initial Install
 ---------------------------------
