@@ -26,17 +26,19 @@ Completing Installation
  1) You must add two libraries from the Andoid SDK in /extras, and then add/modify some .. things ... to make it work in Cordova.
  For your convenience, ready-to-use versions are supplied in the android-sdk directory of this plugin.
  Otherwise, you can get ... not ready-to-use ... versions from:
-  * [android-sdk]/extras/google/play_apk_expansion
-  * [android-sdk]/extras/google/play_licensing
+ 
+   ``[android-sdk]/extras/google/play_apk_expansion``
+   ``[android-sdk]/extras/google/play_licensing``
  
  
  2) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk
  folder to your ROOT directory:
-
+ 
  ````
  android.library.reference.2=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
  android.library.reference.3=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/zip_file
  ````
+ 
  
  3) You must specify an expansion authority (to avoid conflicting provider problems), your application's Google Play public license key,
  a main and patch version, and a main and patch file size. These variables are located in "/platforms/android/res/values/xapkreader.xml"
