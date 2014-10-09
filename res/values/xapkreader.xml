@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="text_downloading_assets">Downloading assets…</string>
+    <string name="text_preparing_assets">Preparing assets…</string>
+    <string name="text_download_failed">Download failed.</string>
+    <string name="text_error">Error.</string>
+    <string name="text_close">Close.</string>
+    <string name="expansion_authority">com.sample.expansion</string>
+    <integer name="main_version">1</integer>
+    <integer name="patch_version">1</integer>
+    <integer name="main_file_size">123456</integer>
+    <integer name="patch_file_size">0</integer>
+    <string name="google_play_public_key">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>
+</resources>

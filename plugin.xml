@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="org.apache.cordova.xapkreader" version="2.0.0">
+ <name>Cordova Expansion File Reader</name>
+ <description>Easily access APK expansion file data.</description>
+ <author>Michael Romanovsky</author>
+ <license>MIT (see readme.md)</license>
+ <keywords>cordova,apk,expansion,file,xapk,xapkreader,agamemnus</keywords>
+ 
+ <platform name="android">
+  
+  <config-file target="res/xml/config.xml" parent="/*">
+   <feature name="XAPKReader">
+    <param name="android-package" value="org.apache.cordova.xapkreader.XAPKReader"/>
+    <param name="onload" value="true" />
+   </feature>
+  </config-file>
+  
+  <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
+  <config-file target="res/values/xapkreader.xml" parent="/*">
+   <string name="expansion_authority">com.sample.expansion</string>
+   <integer name="main_version">1</integer>
+   <integer name="patch_version">1</integer>
+   <integer name="main_file_size">123456</integer>
+   <integer name="patch_file_size">0</integer>
+   <string name="google_play_public_key">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>
+  </config-file>
+  
+  <source-file src="src/android/XAPKReader.java" target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKProvider.java" target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKDownloaderActivity.java" target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKDownloaderService.java" target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKAlarmReceiver.java" target-dir="src/org/apache/cordova/xapkreader" />
+  
+  <config-file target="AndroidManifest.xml" parent="/manifest">
+   <!-- Required to download files from Google Play -->
+   <uses-permission android:name="android.permission.INTERNET" />
+   <!-- Required to keep CPU alive while downloading files (NOT to keep screen awake) -->
+   <uses-permission android:name="android.permission.WAKE_LOCK" />
+   <!-- Required to poll the state of the network connection and respond to changes -->
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <!-- Required to check whether Wi-Fi is enabled -->
+   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+   <!-- Required to read and write the expansion files on shared storage -->
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   <!-- Required to access Google Play Licensing -->
+   <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+  </config-file>
+  
+  <config-file target="AndroidManifest.xml" parent="application">
+   <activity android:name="org.apache.cordova.xapkreader.XAPKDownloaderActivity" android:label="@string/app_name" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
+    <intent-filter></intent-filter>
+   </activity>
+   <service android:name=".XAPKDownloaderService" />
+   <receiver android:name=".XAPKAlarmReceiver" />
+   <provider android:authorities="com.sample.expansion" android:exported="false" android:multiprocess="true" android:name="org.apache.cordova.xapkreader.XAPKProvider" />
+  </config-file>
+  
+  <info> See the README.md file to complete your installation.</info>
+  
+ </platform>
+</plugin>
