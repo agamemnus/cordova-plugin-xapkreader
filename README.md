@@ -25,9 +25,10 @@ Completing Installation
  2) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk
  folder to your ROOT directory:
 
- ``android.library.reference.2=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library``
- 
- ``android.library.reference.3=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/zip_file``
+ ````
+ android.library.reference.2=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
+ android.library.reference.3=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/zip_file
+ ````
  
  3) You must specify an expansion authority (to avoid conflicting provider problems), your application's Google Play public license key,
  a main and patch version, and a main and patch file size. These variables are located in "/platforms/android/res/values/xapkreader.xml"
