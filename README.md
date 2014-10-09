@@ -25,6 +25,7 @@ Completing Installation
  2) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk
  folder to your ROOT directory:
  ``android.library.reference.2=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library``
+ 
  ``android.library.reference.3=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/zip_file``
  
  3) You must specify an expansion authority (to avoid conflicting provider problems), your application's Google Play public license key,
@@ -34,7 +35,9 @@ Completing Installation
  Instead, modify the values inside plugins/android.json:
  3a) Modify this in /plugins/android.json, which updates /platforms/android/AndroidManifest.xml:
  ``android:authorities=\"com.sample.expansion\"``
+ 
  to:
+ 
  ``android:authorities=\"[YOUR CONTENT PROVIDER URI!]\"``
  
  3b) Modify these xml values in android.json, which creates/modifies res\values\xapkreader.xml:
