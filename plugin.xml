@@ -15,6 +15,7 @@
    </feature>
   </config-file>
   
+  <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
    <string name="text_downloading_assets">Downloading assets…</string>
    <string name="text_preparing_assets">Preparing assets…</string>
