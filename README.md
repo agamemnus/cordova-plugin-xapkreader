@@ -22,6 +22,7 @@ Completing Installation
 
  To complete installation:
  
+ 
  1) You must add two libraries from the Andoid SDK in /extras, and then add/modify some .. things ... to make it work in Cordova.
  For your convenience, ready-to-use versions are supplied in the android-sdk directory of this plugin.
  Otherwise, you can get ... not ready-to-use ... versions from:
