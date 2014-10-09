@@ -1,4 +1,4 @@
-Client library for the Google Market APK Expansion files.
+Client library for the Google Play APK Expansion files.
 
 Changelog
 ---------
