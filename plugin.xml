@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="org.apache.cordova.xapkreader" version="2.0.0">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="org.apache.cordova.xapkreader" version="0.1.0">
  <name>Cordova Expansion File Reader</name>
  <description>Easily access APK expansion file data.</description>
  <author>Michael Romanovsky</author>
