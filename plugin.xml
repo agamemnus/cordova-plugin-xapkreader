@@ -15,7 +15,6 @@
    </feature>
   </config-file>
   
-  <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
    <string name="expansion_authority">com.sample.expansion</string>
    <integer name="main_version">1</integer>
