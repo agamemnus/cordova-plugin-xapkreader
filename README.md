@@ -5,9 +5,11 @@ Downloading and Initial Install
 ---------------------------------
 
 Normally:
+
 ``cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git``
 
 With plugman:
+
 ``plugman install --platform android --project . --plugin https://github.com/agamemnus/cordova-plugin-xapkreader.git``
 
 
