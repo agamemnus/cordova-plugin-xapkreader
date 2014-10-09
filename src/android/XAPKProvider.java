@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class XAPKProvider extends APEZProvider {
-	private ZipResourceFile mAPKExtensionFile;
-	private boolean mInit;
+private ZipResourceFile mAPKExtensionFile;
+private boolean mInit;
  
  public String expansionAuthority = "com.sample.expansion";
  @Override public String getAuthority () {return expansionAuthority;}
