@@ -1,6 +1,23 @@
 cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
 ================================================================
 
+Purpose
+--------
+
+Google Play limits APK file sizes to 50 megabytes. APK expansion files are their solution. This plugin allows you to more easily implement APK expansion files in Cordova, automating most of the things.
+
+Donations
+----------
+
+Yes, I put this near the top, so you, dear reader, wouldn't miss it. Perhaps you'd like to donate some money to my gittip account? https://www.gittip.com/agamemnus/
+
+Or... maybe buy my first game, on Google Play:
+https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.premium
+
+Or ... if you can't afford $0.99 ..., maybe you could download the free version and rate it...:
+https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
+
+
 Downloading and Initial Install
 ---------------------------------
 
