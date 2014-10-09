@@ -1,8 +1,6 @@
-
- https://github.com/agamemnus/cordova-plugin-xapkreader/
- cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
+cordova-plugin-xapkreader
 ================================================================
-
+ (Agamemnus/Flyingsoft Games edition)
 
 Downloading and Initial Install
 ---------------------------------
