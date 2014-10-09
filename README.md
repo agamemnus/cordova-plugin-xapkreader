@@ -13,9 +13,11 @@ Donations
 Yes, I put this near the top, so you, dear reader, wouldn't miss it. Perhaps you'd like to donate some money to my gittip account? https://www.gittip.com/agamemnus/
 
 Or... maybe buy my first game, on Google Play:
+<br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.premium
 
 Or ... if you can't afford $0.99 ..., maybe you could download the free version and rate it...:
+<br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
 
