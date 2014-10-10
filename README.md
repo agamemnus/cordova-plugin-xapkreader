@@ -48,6 +48,7 @@ With plugman:
 plugman install --platform android --project . --plugin https://github.com/agamemnus/cordova-plugin-xapkreader.git
 ````
 
+NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](https://github.com/agamemnus/blob/gh-pages/cordova-plugin-xapkreader/media_plugin_workaround.txt) for more details.
 
 Completing Installation
 ------------------------
