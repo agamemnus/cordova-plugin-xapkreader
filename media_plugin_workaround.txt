@@ -1,6 +1,6 @@
 APK expansions cannot unzip/use Cordova Media plugin files, because the Cordova Media and File plugins don't
-understand the ``content://`` prefix. (see https://github.com/apache/cordova-plugin-media/pull/27).
+understand the "content://" URI scheme. (see https://github.com/apache/cordova-plugin-media/pull/27).
  
-If you are using Cordova Crosswalk, there isn't much of a reason to use it anyway, as you can just add 
-``xwalk --disable-gesture-requirement-for-media-playback`` setting into your platforms/android/assets/xwalk-command-line
-file to enable media playback without gestures.
+If you are using Cordova Crosswalk, there isn't much of a reason to use it anyway, as you can just add
+"xwalk --disable-gesture-requirement-for-media-playback" into your platforms/android/assets/xwalk-command-line file
+to enable media playback without gestures.
