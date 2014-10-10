@@ -37,13 +37,13 @@ public class XAPKReader extends CordovaPlugin {
   for (int i = 0; i < curlen; i++) {
    int currentId = cordova.getActivity().getResources().getIdentifier (xmlData[i][0], xmlData[i][1], packageName);
    //switch (xmlData[i][1]) {
+   // case "bool"    : bundle.putBoolean(xmlData[i][0], cordova.getActivity().getResources().getBoolean(currentId)); break;
    // case "integer" : bundle.putInt    (xmlData[i][0], cordova.getActivity().getResources().getInteger(currentId)); break;
    // case "string"  : bundle.putString (xmlData[i][0], cordova.getActivity().getResources().getString (currentId)); break;
-   // case "boolean" : bundle.putBoolean(xmlData[i][0], cordova.getActivity().getResources().getBoolean(currentId)); break;
    //}
+   if (xmlData[i][1] == "bool")    {bundle.putBoolean(xmlData[i][0], cordova.getActivity().getResources().getBoolean(currentId)); continue;}
    if (xmlData[i][1] == "string")  {bundle.putString (xmlData[i][0], cordova.getActivity().getResources().getString (currentId)); continue;}
    if (xmlData[i][1] == "integer") {bundle.putInt    (xmlData[i][0], cordova.getActivity().getResources().getInteger(currentId)); continue;}
-   if (xmlData[i][1] == "bool")    {bundle.putBoolean(xmlData[i][0], cordova.getActivity().getResources().getBoolean(currentId)); continue;}
   }
   
   // Send data to the ContentProvider instance.
