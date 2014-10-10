@@ -3,4 +3,4 @@ understand the "content://" URI scheme. (see https://github.com/apache/cordova-p
  
 If you are using Cordova Crosswalk, there isn't much of a reason to use it anyway, as you can just add
 "xwalk --disable-gesture-requirement-for-media-playback" into your "platforms/android/assets/xwalk-command-line" file
-to enable media playback without gestures. (i.e.: touch events)
+to enable media playback without gestures (e.g.: touch events).
