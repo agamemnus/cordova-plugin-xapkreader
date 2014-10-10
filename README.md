@@ -75,6 +75,7 @@ Completing Installation
  4) You must specify an expansion authority (to avoid conflicting provider problems), your application's Google Play public license key, a main and patch version, and a main and patch file size. These variables are located in "/platforms/android/res/values/xapkreader.xml" and "/platforms/android/AndroidManifest.xml", but you should not modify them, as they are automatically generated when you build your application.
  
  Instead, modify the values inside plugins/android.json:
+ 
  4a) Modify this in /plugins/android.json, which updates /platforms/android/AndroidManifest.xml:
  
  ``android:authorities=\"com.sample.expansion\"``
