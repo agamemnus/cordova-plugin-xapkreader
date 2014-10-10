@@ -54,16 +54,15 @@ Completing Installation
 
  To complete installation:
  
+ 1) Make sure that ``platforms/android/ant-build`` and ``platforms/android/ant-gen`` are deleted so that the plugin generates the necessary files when you build your APK.
  
- 1) You must add two libraries from the Andoid SDK in /extras, and then add/modify some .. things ... to make it work in Cordova.
- For your convenience, ready-to-use versions are supplied in the android-sdk directory of this plugin.
- Otherwise, you can get ... not ready-to-use ... versions from:
+ 2) For your convenience, ready-to-use versions of the play_apk_expansion and play_licensing library are already supplied in the android-sdk directory of this plugin. These are Android SDK libraries that are needed for the plugin to run. These plugins (uncompiled, and without correct pathing set) are also available from your Android SDK directory.
  
    ``[android-sdk]/extras/google/play_apk_expansion``
    ``[android-sdk]/extras/google/play_licensing``
  
  
- 2) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk
+ 3) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk
  folder to your ROOT directory:
  
  ````
@@ -72,12 +71,12 @@ Completing Installation
  ````
  
  
- 3) You must specify an expansion authority (to avoid conflicting provider problems), your application's Google Play public license key,
+ 4) You must specify an expansion authority (to avoid conflicting provider problems), your application's Google Play public license key,
  a main and patch version, and a main and patch file size. These variables are located in "/platforms/android/res/values/xapkreader.xml"
  and "/platforms/android/AndroidManifest.xml", but you should not modify them, as they are automatically generated when you build your application.
  
  Instead, modify the values inside plugins/android.json:
- 3a) Modify this in /plugins/android.json, which updates /platforms/android/AndroidManifest.xml:
+ 4a) Modify this in /plugins/android.json, which updates /platforms/android/AndroidManifest.xml:
  
  ``android:authorities=\"com.sample.expansion\"``
  
@@ -85,7 +84,7 @@ Completing Installation
  
  ``android:authorities=\"[YOUR CONTENT PROVIDER URI!]\"``
  
- 3b) Modify these xml values in android.json, which creates/modifies res\values\xapkreader.xml:
+ 4b) Modify these xml values in android.json, which creates/modifies res\values\xapkreader.xml:
 ````
  expansion_authority    : must be your content provider uri, as above. (eg: com.sample.expansion)
  main_version           : your file's main version.
