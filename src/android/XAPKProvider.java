@@ -55,6 +55,8 @@ private boolean mInit;
   if (initIfNecessary () == false) throw new FileNotFoundException ();
   String path = uri.getEncodedPath ();
   if (path.startsWith("/")) path = path.substring (1);
-  return mAPKExtensionFile.getAssetFileDescriptor (path);  
+  AssetFileDescriptor result = mAPKExtensionFile.getAssetFileDescriptor (path);
+  if (result == null) throw new FileNotFoundException ();
+  return result;
  }
 }
