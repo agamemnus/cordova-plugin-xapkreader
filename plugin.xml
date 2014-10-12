@@ -30,13 +30,13 @@
    <integer name="patch_file_size">0</integer>
   </config-file>
   
-  <source-file src="src/android/XAPKAlarmReceiver.java" target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKAlarmReceiver.java"      target-dir="src/org/apache/cordova/xapkreader" />
   <source-file src="src/android/XAPKDownloaderActivity.java" target-dir="src/org/apache/cordova/xapkreader" />
-  <source-file src="src/android/XAPKDownloaderService.java" target-dir="src/org/apache/cordova/xapkreader" />
-  <source-file src="src/android/XAPKExpansionSupport.java" target-dir="src/org/apache/cordova/xapkreader" />
-  <source-file src="src/android/XAPKProvider.java" target-dir="src/org/apache/cordova/xapkreader" />
-  <source-file src="src/android/XAPKReader.java" target-dir="src/org/apache/cordova/xapkreader" />
-  <source-file src="src/android/XAPKZipResourceFile.java" target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKDownloaderService.java"  target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKExpansionSupport.java"   target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKProvider.java"           target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKReader.java"             target-dir="src/org/apache/cordova/xapkreader" />
+  <source-file src="src/android/XAPKZipResourceFile.java"    target-dir="src/org/apache/cordova/xapkreader" />
   
   <config-file target="AndroidManifest.xml" parent="/manifest">
    <!-- Required to download files from Google Play -->
