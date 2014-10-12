@@ -58,17 +58,16 @@ Completing Installation
  
  1) Make sure that ``platforms/android/ant-build`` and ``platforms/android/ant-gen`` are deleted so that the plugin generates the necessary files when you build your APK.
  
- 2) For your convenience, ready-to-use versions of the play_apk_expansion and play_licensing library are already supplied in the android-sdk directory of this plugin. These are Android SDK libraries that are needed for the plugin to run. These plugins (uncompiled, and without correct pathing set) are also available from your Android SDK directory.
+ 2) For your convenience, ready-to-use versions of the ``play_apk_expansion`` and ``play_licensing`` libraries are already supplied in the android-sdk directory of this plugin. Components of these Android SDK libraries are needed for the plugin to run. These plugins (uncompiled, and without correct pathing set) are also available from your Android SDK directory.
  
    ``[android-sdk]/extras/google/play_apk_expansion``
    ``[android-sdk]/extras/google/play_licensing``
  
  
- 3) You must modify project.properties inside platforms/android to add the library references. For example, if you add the android-sdk folder to your ROOT directory (the default install):
+ 3) You must modify project.properties inside platforms/android to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
  
  ````
  android.library.reference.2=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
- android.library.reference.3=../../plugins/org.apache.cordova.xapkreader/android-sdk/extras/google/play_apk_expansion/zip_file
  ````
  
  
