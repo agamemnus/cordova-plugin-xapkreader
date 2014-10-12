@@ -87,13 +87,11 @@ Completing Installation
  4b) Modify these xml values in android.json, which creates/modifies res\values\xapkreader.xml:
 ````
  expansion_authority    : must be your content provider uri, as above. (eg: com.sample.expansion)
- main_version           : your file's main version.
- patch_version          : your file's patch version.
- main_file_size         : your main version's file size.
- patch_file_size        : your patch version's file size.
- main_check_file_size   : boolean that is true if the plugin should validate the main file size against main_file_size.
- patch_check_file_size  : boolean that is true if the plugin should validate the patch file size against patch_file_size.
  application_public_key : your application's Google Play public key.
+ main_version           : your file's main version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "main".
+ patch_version          : your file's patch version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "patch".
+ main_file_size         : your main version's file size. OPTIONAL. Set to 0 to skip the check.
+ patch_file_size        : your patch version's file size. OPTIONAL. Set to 0 to skip the check.
 ````
 
 Usage
