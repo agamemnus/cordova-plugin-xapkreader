@@ -24,8 +24,6 @@ public class XAPKReader extends CordovaPlugin {
    {"patch_version"          , "integer"},
    {"main_file_size"         , "integer"},
    {"patch_file_size"        , "integer"},
-   {"main_check_file_size"   , "bool"},
-   {"patch_check_file_size"  , "bool"},
    {"expansion_authority"    , "string"},
    {"text_downloading_assets", "string"},
    {"text_preparing_assets"  , "string"},
