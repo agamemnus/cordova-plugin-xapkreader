@@ -26,7 +26,7 @@ Tips
 
 * You can test your expansion files my adding them to Android/obb/, as described here:  http://developer.android.com/google/play/expansion-files.html#Testing
 
-* If you _manually rename_ the main or patch file when testing, the .obb (zip) file <--> URI mappings will break because the plugin won't run and remap every time you open the app. If you reinstall, the device will rename the files.
+* If you **manually rename** the main or patch file when testing, the .obb (zip) file <--> URI mappings will break because the plugin won't run and remap every time you open the app. If you reinstall, the device will rename the files.
 
 * As expected, contents in the patch file overwrite contents in the main file. If you need to update a small some file without making the user download let's say a gigabyte of data, you'd want to update the patch file, and store the rest of the data in the main file.
 
