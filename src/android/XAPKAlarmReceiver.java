@@ -1,4 +1,4 @@
-package org.flyingsoftgames.xapkreader;
+package com.flyingsoftgames.xapkreader;
 
 import com.google.android.vending.expansion.downloader.DownloaderClientMarshaller;
 
