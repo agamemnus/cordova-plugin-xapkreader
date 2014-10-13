@@ -1,4 +1,4 @@
-package org.apache.cordova.xapkreader;
+package org.apache.flyingsoftgames.xapkreader;
 
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
