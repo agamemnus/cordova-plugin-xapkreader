@@ -1,4 +1,4 @@
-package org.apache.flyingsoftgames.xapkreader;
+package com.flyingsoftgames.xapkreader;
  
 import java.io.File;
 import java.io.FileFilter;
