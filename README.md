@@ -36,6 +36,7 @@ Tips
 
 * When you upload a new APK version, don't forget to check that your APK expansions are actually included. If you don't see them as included in the pop-up, they aren't -- sometimes Google Play will clear that information, so you have to select the APK expansion from the dropdown again. (that you already uploaded, assuming you uploaded one.)
 
+* Uninstalling the plugin will not remove the provider tag in AndroidManifest.xml, or any "config_munge" values in android.json.
 
 Downloading and Initial Install
 ---------------------------------
