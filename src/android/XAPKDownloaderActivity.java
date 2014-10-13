@@ -37,13 +37,13 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   return true;
  }
  
- boolean allExpansionFilesDelivered (int[] versionList, long[] fileSizeList, boolean[] checkFileSizeList) {
+ boolean allExpansionFilesDelivered (int[] versionList, long[] fileSizeList) {
   for (int i = 0; i < 2; i++) {
    // If the version number is 0, consider it to be delivered.
    if (versionList[i] == 0) continue;
    String fileName = Helpers.getExpansionAPKFileName(this, (i == 0), versionList[i]);
    // If the file doesn't exist or has the wrong file size, consider the files to be undelivered.
-   if (!validateFile(this, fileName, fileSizeList[i], checkFileSizeList[i])) {
+   if (!validateFile(this, fileName, fileSizeList[i], (fileSizeList[i] != 0))) {
     Log.e (LOG_TAG, "ExpansionAPKFile doesn't exist or has a wrong size (" + fileName + ").");
     return false;
    }
@@ -55,11 +55,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   super.onCreate (savedInstanceState);
   xmlData = savedInstanceState;
   
-  int [] versionList          = {this.getIntent().getIntExtra ("main_version"           ,     0), this.getIntent().getIntExtra ("patch_version"           ,     0)};
-  long[] fileSizeList         = {this.getIntent().getLongExtra("main_file_size"         ,    0L), this.getIntent().getLongExtra("patch_file_size"         ,    0L)};
-  boolean[] checkFileSizeList = {this.getIntent().getBooleanExtra("main_check_file_size", false), this.getIntent().getBooleanExtra("patch_check_file_size", false)};
+  int [] versionList          = {this.getIntent().getIntExtra ("main_version"  ,  0), this.getIntent().getIntExtra ("patch_version"  ,  0)};
+  long[] fileSizeList         = {this.getIntent().getLongExtra("main_file_size", 0L), this.getIntent().getLongExtra("patch_file_size", 0L)};
   // Check if both expansion files are already available and downloaded before going any further.
-  if (allExpansionFilesDelivered(versionList, fileSizeList, checkFileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
+  if (allExpansionFilesDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
   
   // Download the expansion file(s).
   try {
