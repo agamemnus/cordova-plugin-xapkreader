@@ -1,3 +1,20 @@
+// Original File Copyright (C) 2012 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+ 
+ // Modifications: syntax, formatting, and making pesky addPatchFile public...
+ 
 package org.apache.cordova.xapkreader;
 
 import android.content.res.AssetFileDescriptor;
@@ -207,7 +224,7 @@ public class XAPKZipResourceFile {
  static private int read4LE (RandomAccessFile f) throws EOFException, IOException {return swapEndian(f.readInt());}
  
  // Opens the specified file read-only. We memory-map the entire thing and close the file before returning.
- public void addPatchFile(String zipFileName) throws IOException {
+ public void addPatchFile (String zipFileName) throws IOException {
   File file = new File(zipFileName);
   RandomAccessFile f = new RandomAccessFile(file, "r");
   long fileLength = f.length();
