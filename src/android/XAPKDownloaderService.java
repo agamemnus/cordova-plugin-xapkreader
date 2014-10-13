@@ -1,4 +1,4 @@
-package org.apache.cordova.xapkreader;
+package org.apache.flyingsoftgames.xapkreader;
 
 import com.google.android.vending.expansion.downloader.impl.DownloaderService;
 
