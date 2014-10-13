@@ -38,6 +38,7 @@ Tips
 
 * Uninstalling the plugin will not remove the provider tag in AndroidManifest.xml, or any "config_munge" values in android.json.
 
+
 Downloading and Initial Install
 ---------------------------------
 
