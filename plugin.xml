@@ -11,7 +11,7 @@
   
   <config-file target="res/xml/config.xml" parent="/*">
    <feature name="XAPKReader">
-    <param name="android-package" value="org.apache.flyingsoftgames.xapkreader.XAPKReader"/>
+    <param name="android-package" value="com.flyingsoftgames.xapkreader.XAPKReader"/>
     <param name="onload" value="true" />
    </feature>
   </config-file>
