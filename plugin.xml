@@ -5,7 +5,7 @@
  <author>Michael Romanovsky</author>
  <license>MIT (see readme.md)</license>
  <keywords>cordova,apk,expansion,file,xapk,expansion file reader,xapk reader,xapkreader,android,agamemnus,flyingsoftgames</keywords>
- <engines></engines><engine name="cordova" version=">=3.0.0" /></engines>
+ 
  
  <platform name="android">
   
