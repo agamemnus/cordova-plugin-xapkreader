@@ -15,7 +15,7 @@
  
  // Modifications: syntax, formatting, and making pesky addPatchFile public...
  
-package org.apache.flyingsoftgames.xapkreader;
+package com.flyingsoftgames.xapkreader;
 
 import android.content.res.AssetFileDescriptor;
 import android.os.ParcelFileDescriptor;
