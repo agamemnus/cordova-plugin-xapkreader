@@ -1,4 +1,4 @@
-package org.apache.flyingsoftgames.xapkreader;
+package com.flyingsoftgames.xapkreader;
 
 import android.content.Context;
 import android.app.Activity;
