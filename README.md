@@ -26,7 +26,11 @@ Tips
 
 * You can test your expansion files my adding them to Android/obb/, as described here:  http://developer.android.com/google/play/expansion-files.html#Testing
 
-* Unfortunately, you can't see the version number of your expansion files when you upload them to Google Play. The version number Google Play assigns will be equal to the version of the APK itself at the time that you upload the main/patch expansion file version.
+* If you _manually rename_ the main or patch file when testing, the .obb (zip) file <--> URI mappings will break because the plugin won't run and remap every time you open the app. If you reinstall, the device will rename the files.
+
+* As expected, contents in the patch file overwrite contents in the main file. If you need to update a small some file without making the user download let's say a gigabyte of data, you'd want to update the patch file, and store the rest of the data in the main file.
+
+*~~Unfortunately, you can't see the version number of your expansion files when you upload them to Google Play. The version number Google Play assigns will be equal to the version of the APK itself at the time that you upload the main/patch expansion file version.~~ FORTUNATELY, in this plugin, it's not a problem, as you don't have to set the version number at all.
 
 * If you upload a new main or patch APK expansion file to Google Play, the old main or patch file will be deleted when Google Play updates the user's device. Theoretically.
 
