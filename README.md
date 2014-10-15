@@ -89,7 +89,7 @@ Completing Installation
  
  ``android:authorities=\"[YOUR CONTENT PROVIDER URI!]\"``
  
- 4b) Modify these xml values in android.json, which creates/modifies res\values\xapkreader.xml:
+ 4b) Modify these xml values in android.json, which creates/modifies res/values/xapkreader.xml:
 ````
  expansion_authority    : must be your content provider uri, as above. (eg: com.sample.expansion)
  application_public_key : your application's Google Play public key.
