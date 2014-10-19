@@ -16,7 +16,7 @@ Or... maybe buy my first game, on Google Play:
 <br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.premium
 
-Or ... if you can't afford $0.99 ..., maybe you could download the free version and rate it... (and tell your friends):
+Or ... if you can't afford $2.49 ..., maybe you could download the free version and rate it... (and tell your friends):
 <br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
