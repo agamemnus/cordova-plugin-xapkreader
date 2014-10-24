@@ -16,7 +16,7 @@ Or... maybe buy my first game, on Google Play:
 <br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.premium
 
-Or ... if you can't afford $0.99 ..., maybe you could download the free version and rate it...:
+Or ... if you can't afford $2.49 ..., maybe you could download the free version and rate it...:
 <br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
@@ -96,12 +96,12 @@ Completing Installation
  
  4b) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in platform/android/res/values/xapkreader.xml:
 ````
- expansion_authority    : must be your content provider uri. (eg: com.sample.expansion)
- application_public_key : your application's Google Play public key.
- main_version           : your file's main version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "main".
- patch_version          : your file's patch version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "patch".
- main_file_size         : your main version's file size. OPTIONAL. Set to 0 to skip the check.
- patch_file_size        : your patch version's file size. OPTIONAL. Set to 0 to skip the check.
+ xapk_expansion_authority    : must be your content provider uri. (eg: com.sample.expansion)
+ xapk_application_public_key : your application's Google Play public key.
+ xapk_main_version           : your file's main version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "main".
+ xapk_patch_version          : your file's patch version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "patch".
+ xapk_main_file_size         : your main version's file size. OPTIONAL. Set to 0 to skip the check.
+ xapk_patch_file_size        : your patch version's file size. OPTIONAL. Set to 0 to skip the check.
 ````
 
 Usage
