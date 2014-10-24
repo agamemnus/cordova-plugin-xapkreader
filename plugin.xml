@@ -16,6 +16,7 @@
    </feature>
   </config-file>
   
+  <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
    <string name="xapk_expansion_authority">com.sample.expansion</string>
    <string name="xapk_google_play_public_key">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>
