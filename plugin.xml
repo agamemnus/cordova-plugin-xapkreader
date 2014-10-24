@@ -60,7 +60,7 @@
    </activity>
    <service android:name=".XAPKDownloaderService" />
    <receiver android:name=".XAPKAlarmReceiver" />
-   <provider android:authorities="@string/expansion_authority" android:exported="false" android:multiprocess="true" android:name="com.flyingsoftgames.xapkreader.XAPKProvider" />
+   <provider android:authorities="@string/xapk_expansion_authority" android:exported="false" android:multiprocess="true" android:name="com.flyingsoftgames.xapkreader.XAPKProvider" />
   </config-file>
   
   <info> See the README.md file to complete your installation.</info>
