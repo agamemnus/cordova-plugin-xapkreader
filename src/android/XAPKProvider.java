@@ -82,10 +82,10 @@ public class XAPKProvider extends ContentProvider {
  
  @Override public Bundle call (String method, String arg, Bundle bundle) {
   if (method.equals("set_expansion_file_version_data")) {
-   mainFileVersion     = bundle.getInt   ("main_version"          , 0);
-   patchFileVersion    = bundle.getInt   ("patch_version"         , 0);
-   googlePlayPublicKey = bundle.getString("google_play_public_key", "");
-   expansionAuthority  = bundle.getString("expansion_authority"   , "com.sample.expansion");
+   mainFileVersion     = bundle.getInt   ("xapk_main_version"          , 0);
+   patchFileVersion    = bundle.getInt   ("xapk_patch_version"         , 0);
+   googlePlayPublicKey = bundle.getString("xapk_google_play_public_key", "");
+   expansionAuthority  = bundle.getString("xapk_expansion_authority"   , "com.sample.expansion");
    xmlDataReceived = true;
    return null;
   }
