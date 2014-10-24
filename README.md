@@ -94,7 +94,7 @@ Completing Installation
                         }
  ````
  
- 4b) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in platform/android/res/values/xapkreader.xml:
+ 4b) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in ``/platform/android/res/values/xapkreader.xml``:
 ````
  xapk_expansion_authority    : must be your content provider uri. (eg: com.sample.expansion)
  xapk_application_public_key : your application's Google Play public key.
