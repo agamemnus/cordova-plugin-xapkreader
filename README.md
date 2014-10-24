@@ -70,7 +70,7 @@ Completing Installation
    ``[android-sdk]/extras/google/play_licensing``
  
  
- 3) You must modify project.properties inside platforms/android to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
+ 3) You must modify project.properties inside ``platforms/android`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
  
  ````
  android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
