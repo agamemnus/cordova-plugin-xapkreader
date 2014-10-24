@@ -70,7 +70,7 @@ Completing Installation
    ``[android-sdk]/extras/google/play_licensing``
  
  
- 3) You must modify project.properties inside ``platforms/android`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
+ 3) You must modify project.properties inside ``/platforms/android`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
  
  ````
  android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
@@ -79,7 +79,7 @@ Completing Installation
  
  4) You must specify an expansion authority (to reference files [see Usage], and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
  
- 4a) In android.json, look for and modify this text:
+ 4a) In android.json, look for and modify ``com.sample.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
  ````
   "res/values/xapkreader.xml": {
                 "parents": {
