@@ -55,8 +55,8 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   super.onCreate (savedInstanceState);
   xmlData = savedInstanceState;
   
-  int [] versionList          = {this.getIntent().getIntExtra ("main_version"  ,  0), this.getIntent().getIntExtra ("patch_version"  ,  0)};
-  long[] fileSizeList         = {this.getIntent().getLongExtra("main_file_size", 0L), this.getIntent().getLongExtra("patch_file_size", 0L)};
+  int [] versionList          = {this.getIntent().getIntExtra ("xapk_main_version"  ,  0), this.getIntent().getIntExtra ("xapk_patch_version"  ,  0)};
+  long[] fileSizeList         = {this.getIntent().getLongExtra("xapk_main_file_size", 0L), this.getIntent().getLongExtra("xapk_patch_file_size", 0L)};
   // Check if both expansion files are already available and downloaded before going any further.
   if (allExpansionFilesDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
   
@@ -90,7 +90,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    // Shows download progress.
    mProgressDialog = new ProgressDialog (XAPKDownloaderActivity.this);
    mProgressDialog.setProgressStyle (ProgressDialog.STYLE_HORIZONTAL);
-   mProgressDialog.setMessage (xmlData.getString("text_downloading_assets", ""));
+   mProgressDialog.setMessage (xmlData.getString("xapk_text_downloading_assets", ""));
    mProgressDialog.setCancelable (false);
    mProgressDialog.show ();
    return;
@@ -142,7 +142,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   if (newState == STATE_DOWNLOADING) {Log.v (LOG_TAG, "Downloading..."); return;}
   
   if (newState == STATE_COMPLETED) {
-   mProgressDialog.setMessage (xmlData.getString("text_preparing_assets", ""));
+   mProgressDialog.setMessage (xmlData.getString("xapk_text_preparing_assets", ""));
    // Dismiss progress dialog.
    mProgressDialog.dismiss ();
    // Finish activity.
@@ -152,9 +152,9 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   
   // All other states.
   Builder alert = new AlertDialog.Builder (this);
-  alert.setTitle (xmlData.getString("text_error", ""));
-  alert.setMessage (xmlData.getString("text_download_failed", ""));
-  alert.setNeutralButton (xmlData.getString("text_close", ""), null);
+  alert.setTitle (xmlData.getString("xapk_text_error", ""));
+  alert.setMessage (xmlData.getString("xapk_text_download_failed", ""));
+  alert.setNeutralButton (xmlData.getString("xapk_text_close", ""), null);
   alert.show ();
  }
 }
