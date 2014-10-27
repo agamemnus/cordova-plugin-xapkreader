@@ -85,11 +85,11 @@ Completing Installation
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<string name=\"expansion_authority\">com.sample.expansion</string>",
+                            "xml": "<string name=\"xapk_expansion_authority\">com.sample.expansion</string>",
                             "count": 1
                         },
                         {
-                            "xml": "<string name=\"google_play_public_key\">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>",
+                            "xml": "<string name=\"xapk_google_play_public_key\">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>",
                             "count": 1
                         }
  ````
