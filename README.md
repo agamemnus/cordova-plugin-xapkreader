@@ -62,7 +62,7 @@ Completing Installation
 
  To complete installation:
  
- 1) (INFO) Make sure your .obb zip file is a STORE, and not compressed.
+ 1) (INFO) Make sure your .obb zip file(s) is/are a STORE, and not compressed.
  
  2) (INFO) Make sure that ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen`` are deleted so that the plugin generates the necessary files when you build your APK.
  
