@@ -62,24 +62,26 @@ Completing Installation
 
  To complete installation:
  
- 1) Make sure that ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen`` are deleted so that the plugin generates the necessary files when you build your APK.
+ 1) (INFO) Make sure your .obb zip file is a STORE, and not compressed.
  
- 2) (INFO) For your convenience, ready-to-use versions of the ``play_apk_expansion`` and ``play_licensing`` libraries are already supplied in the android-sdk directory of this plugin. Components of these Android SDK libraries are needed for the plugin to run. These plugins (uncompiled, and without correct pathing set) are also available from your Android SDK directory.
+ 2) (INFO) Make sure that ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen`` are deleted so that the plugin generates the necessary files when you build your APK.
+ 
+ 3) (INFO) For your convenience, ready-to-use versions of the ``play_apk_expansion`` and ``play_licensing`` libraries are already supplied in the android-sdk directory of this plugin. Components of these Android SDK libraries are needed for the plugin to run. These plugins (uncompiled, and without correct pathing set) are also available from your Android SDK directory.
  
    ``[android-sdk]/extras/google/play_apk_expansion``
    ``[android-sdk]/extras/google/play_licensing``
  
  
- 3) You must modify project.properties inside ``/platforms/android`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
+ 4) You must modify project.properties inside ``/platforms/android`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
  
  ````
  android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
  ````
  
  
- 4) You must specify an expansion authority (to reference files [see Usage], and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
+ 5) You must specify an expansion authority (to reference files [see Usage], and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
  
- 4a) In android.json, look for and modify ``com.sample.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
+ 5a) In android.json, look for and modify ``com.sample.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
  ````
   "res/values/xapkreader.xml": {
                 "parents": {
@@ -94,7 +96,7 @@ Completing Installation
                         }
  ````
  
- 4b) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in ``/platform/android/res/values/xapkreader.xml``:
+ 5b) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in ``/platform/android/res/values/xapkreader.xml``:
 ````
  xapk_expansion_authority    : must be your content provider uri. (eg: com.sample.expansion)
  xapk_application_public_key : your application's Google Play public key.
