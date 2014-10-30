@@ -24,7 +24,7 @@ https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 Tips
 -----
 
-* You can test your expansion files my adding them to Android/obb/, as described here:  http://developer.android.com/google/play/expansion-files.html#Testing
+* You can test your expansion files by adding them to Android/obb/, as described here:  http://developer.android.com/google/play/expansion-files.html#Testing
 
 * If you **manually rename** the main or patch file when testing, the .obb (zip) file <--> URI mappings will break because the plugin won't run and remap every time you open the app. If you reinstall, the device will rename the files.
 
