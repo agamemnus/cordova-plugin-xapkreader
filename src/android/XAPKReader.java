@@ -14,9 +14,13 @@ import java.io.InputStream;
 import java.io.IOException;
 
 public class XAPKReader extends CordovaPlugin {
+ 
+ private Bundle bundle = null;
+ private CordovaWebView webView = null;
+ 
  @Override public void initialize (final CordovaInterface cordova, CordovaWebView webView) {
   String packageName = cordova.getActivity().getPackageName();
-  final Bundle bundle = new Bundle ();
+  bundle = new Bundle ();
   
   // Get some data from the xapkreader.xml file.
   String[][] xmlData = new String[][] {
@@ -65,5 +69,15 @@ public class XAPKReader extends CordovaPlugin {
   });
   
   super.initialize (cordova, webView);
+ }
+ 
+ public void reloadExpansionFile () {
+  String expansionAuthority = bundle.getString("xapk_expansion_authority", "");
+  // Load the expansion file.
+  try {
+   webView.getResourceApi().openForRead(Uri.parse(expansionAuthority), true);
+  } catch (IOException e) {
+   e.printStackTrace ();
+  }
  }
 }
