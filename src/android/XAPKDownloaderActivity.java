@@ -28,6 +28,8 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private ProgressDialog mProgressDialog;
  private static final String LOG_TAG = "XAPKDownloader";
  private Bundle xmlData;
+ private int versionList;
+ private long fileSizeList;
  
  // The file may have been delivered by Google Play --- let's make sure it exists and it's the size we expect.
  static public boolean validateFile (Context ctx, String fileName, long fileSize, boolean checkFileSize) {
@@ -55,8 +57,9 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   super.onCreate (savedInstanceState);
   xmlData = savedInstanceState;
   
-  int [] versionList          = {this.getIntent().getIntExtra ("xapk_main_version"  ,  0), this.getIntent().getIntExtra ("xapk_patch_version"  ,  0)};
-  long[] fileSizeList         = {this.getIntent().getLongExtra("xapk_main_file_size", 0L), this.getIntent().getLongExtra("xapk_patch_file_size", 0L)};
+  versionList  = {this.getIntent().getIntExtra ("xapk_main_version"  ,  0), this.getIntent().getIntExtra ("xapk_patch_version"  ,  0)};
+  fileSizeList = {this.getIntent().getLongExtra("xapk_main_file_size", 0L), this.getIntent().getLongExtra("xapk_patch_file_size", 0L)};
+  
   // Check if both expansion files are already available and downloaded before going any further.
   if (allExpansionFilesDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
   
@@ -153,9 +156,12 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   
   if (newState == STATE_COMPLETED) {
    mProgressDialog.setMessage (xmlData.getString("xapk_text_preparing_assets", ""));
+   
    // Dismiss progress dialog.
    mProgressDialog.dismiss ();
-   // Finish activity.
+   
+   // Load the files in and finish the activity.
+   allExpansionFilesDelivered (versionList, fileSizeList);
    finish ();
    return;
   }
