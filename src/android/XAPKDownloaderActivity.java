@@ -139,7 +139,17 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  @Override public void onDownloadStateChanged (int newState) {
   Log.v (LOG_TAG, "DownloadStateChanged: " + getString(Helpers.getDownloaderStringResourceIDFromState(newState)) + ".");
   
-  if (newState == STATE_DOWNLOADING) {Log.v (LOG_TAG, "Downloading..."); return;}
+  if (
+   (newState == STATE_IDLE) ||
+   (newState == STATE_FETCHING_URL) ||
+   (newState == STATE_CONNECTING) ||
+   (newState == STATE_DOWNLOADING) ||
+   (newState == STATE_PAUSED_NETWORK_UNAVAILABLE) ||
+   (newState == STATE_PAUSED_BY_REQUEST) ||
+   (newState == STATE_PAUSED_WIFI_DISABLED_NEED_CELLULAR_PERMISSION) ||
+   (newState == STATE_PAUSED_NEED_CELLULAR_PERMISSION) ||
+   (newState == STATE_PAUSED_ROAMING)
+  ) {Log.v (LOG_TAG, "Downloading..."); return;}
   
   if (newState == STATE_COMPLETED) {
    mProgressDialog.setMessage (xmlData.getString("xapk_text_preparing_assets", ""));
