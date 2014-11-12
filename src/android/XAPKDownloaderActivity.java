@@ -28,8 +28,8 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private ProgressDialog mProgressDialog;
  private static final String LOG_TAG = "XAPKDownloader";
  private Bundle xmlData;
- private int[] versionList;
- private long[] fileSizeList;
+ private int[] versionList   = new int[2];
+ private long[] fileSizeList = new long[2];
  
  // The file may have been delivered by Google Play --- let's make sure it exists and it's the size we expect.
  static public boolean validateFile (Context ctx, String fileName, long fileSize, boolean checkFileSize) {
