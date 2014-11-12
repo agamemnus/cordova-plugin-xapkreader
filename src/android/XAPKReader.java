@@ -15,8 +15,8 @@ import java.io.IOException;
 
 public class XAPKReader extends CordovaPlugin {
  
- private Bundle bundle = null;
- private CordovaWebView webView = null;
+ private static Bundle bundle = null;
+ private static CordovaWebView webView = null;
  
  @Override public void initialize (final CordovaInterface cordova, CordovaWebView webView) {
   String packageName = cordova.getActivity().getPackageName();
@@ -71,7 +71,7 @@ public class XAPKReader extends CordovaPlugin {
   super.initialize (cordova, webView);
  }
  
- public void reloadExpansionFile () {
+ public static void reloadExpansionFile () {
   String expansionAuthority = bundle.getString("xapk_expansion_authority", "");
   // Load the expansion file.
   try {
