@@ -1,5 +1,7 @@
 package com.flyingsoftgames.xapkreader;
 
+import com.flyingsoftgames.xapkreader.XAPKReader;
+
 import android.content.Context;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -165,6 +167,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    
    // Load the files in and finish the activity.
    allExpansionFilesDelivered (versionList, fileSizeList);
+   XAPKReader.reloadExpansionFile ();
    finish ();
    return;
   }
