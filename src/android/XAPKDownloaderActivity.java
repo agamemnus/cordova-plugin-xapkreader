@@ -58,8 +58,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   // xmlData = savedInstanceState;
   xmlData = getIntent().getExtras();
   
-  versionList  = {this.getIntent().getIntExtra ("xapk_main_version"  ,  0), this.getIntent().getIntExtra ("xapk_patch_version"  ,  0)};
-  fileSizeList = {this.getIntent().getLongExtra("xapk_main_file_size", 0L), this.getIntent().getLongExtra("xapk_patch_file_size", 0L)};
+  versionList[0]  = this.getIntent().getIntExtra ("xapk_main_version"   , 0);
+  versionList[1]  = this.getIntent().getIntExtra ("xapk_patch_version"  , 0);
+  fileSizeList[0] = this.getIntent().getLongExtra("xapk_main_file_size" , 0L);
+  fileSizeList[1] = this.getIntent().getLongExtra("xapk_patch_file_size", 0L);
   
   // Check if both expansion files are already available and downloaded before going any further.
   if (allExpansionFilesDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
