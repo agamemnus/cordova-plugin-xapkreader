@@ -60,15 +60,11 @@ Completing Installation
  
  1) (INFO) Make sure your .obb zip file(s) is/are a STORE, and not compressed.
  
- 2) (INFO) Make sure that ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen`` are deleted so that the plugin generates the necessary files when you build your APK.
+ 2) (INFO) Make sure that ``/platforms/android/ant-build/`` and ``/platforms/android/ant-gen/`` are deleted so that the plugin generates the necessary files when you build your APK.
  
- 3) (INFO) For your convenience, ready-to-use versions of the ``play_apk_expansion`` and ``play_licensing`` libraries are already supplied in the android-sdk directory of this plugin. Components of these Android SDK libraries are needed for the plugin to run. These plugins (uncompiled, and without correct pathing set) are also available from your Android SDK directory.
+ 3) (INFO) The android SDK ``play_apk_expansion`` and ``play_licensing`` libraries are needed for this plugin, but they are already supplied, included, and configured in this plugin in the plugin's android-sdk directory.
  
-   ``[android-sdk]/extras/google/play_apk_expansion``
-   ``[android-sdk]/extras/google/play_licensing``
- 
- 
- 4) You must modify project.properties inside ``/platforms/android`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
+ 4) You must modify project.properties inside ``/platforms/android/`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
  
  ````
  android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
