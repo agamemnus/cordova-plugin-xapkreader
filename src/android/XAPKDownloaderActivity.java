@@ -28,6 +28,8 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private ProgressDialog mProgressDialog;
  private static final String LOG_TAG = "XAPKDownloader";
  private Bundle xmlData;
+ private int[] versionList = new int[2];
+ private long[] fileSizeList = new long[2];
  
  // The file may have been delivered by Google Play --- let's make sure it exists and it's the size we expect.
  static public boolean validateFile (Context ctx, String fileName, long fileSize, boolean checkFileSize) {
@@ -54,9 +56,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  @Override public void onCreate (Bundle savedInstanceState) {
   super.onCreate (savedInstanceState);
   xmlData = getIntent().getExtras(); // savedInstanceState;
-  
-  int [] versionList  = {this.getIntent().getIntExtra ("xapk_main_version"  ,  0), this.getIntent().getIntExtra ("xapk_patch_version"  ,  0)};
-  long[] fileSizeList = {this.getIntent().getLongExtra("xapk_main_file_size", 0L), this.getIntent().getLongExtra("xapk_patch_file_size", 0L)};
+  versionList[0] = this.getIntent().getIntExtra ("xapk_main_version" , 0);
+  versionList[1] = this.getIntent().getIntExtra ("xapk_patch_version" , 0);
+  fileSizeList[0] = this.getIntent().getLongExtra("xapk_main_file_size" , 0L);
+  fileSizeList[1] = this.getIntent().getLongExtra("xapk_patch_file_size", 0L);
   
   // Check if both expansion files are already available and downloaded before going any further.
   if (allExpansionFilesDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
