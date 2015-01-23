@@ -53,6 +53,7 @@ public class XAPKReader extends CordovaPlugin {
   
   cordova.getActivity().runOnUiThread (new Runnable() {
    @Override public void run () {
+    XAPKDownloaderActivity.cordovaActivity = cordova.getActivity(); // Workaround for Cordova/Crosswalk flickering status bar bug.
     Context context = cordova.getActivity().getApplicationContext();
     Intent intent = new Intent(context, XAPKDownloaderActivity.class);
     intent.putExtras (bundle);
