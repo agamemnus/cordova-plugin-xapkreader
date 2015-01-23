@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Messenger;
+// <Workaround for Cordova/Crosswalk flickering status bar bug./>
+import android.view.WindowManager;
+// <Workaround for Cordova/Crosswalk flickering status bar bug./>
 import android.util.Log;
 
 import com.google.android.vending.expansion.downloader.DownloadProgressInfo;
@@ -30,6 +33,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private Bundle xmlData;
  private int[] versionList = new int[2];
  private long[] fileSizeList = new long[2];
+ 
+ // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+ public static Activity cordovaActivity = null;
+ // <Workaround for Cordova/Crosswalk flickering status bar bug./>
  
  // The file may have been delivered by Google Play --- let's make sure it exists and it's the size we expect.
  static public boolean validateFile (Context ctx, String fileName, long fileSize, boolean checkFileSize) {
@@ -54,6 +61,12 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  }
  
  @Override public void onCreate (Bundle savedInstanceState) {
+  
+  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+  cordovaActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+  cordovaActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+  
   super.onCreate (savedInstanceState);
   xmlData = getIntent().getExtras(); // savedInstanceState;
   versionList[0] = this.getIntent().getIntExtra ("xapk_main_version" , 0);
