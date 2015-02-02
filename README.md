@@ -12,7 +12,7 @@ Donations
 
 Yes, I put this near the top, so you, dear reader, wouldn't miss it. Perhaps you'd like to donate some money to my gittip account? https://www.gittip.com/agamemnus/ I also have a Paypal account: agamemnus-at-flyingsoftgames-dot-c-o-m.
 
-Or... maybe try my first game, on Google Play, and maybe buy some gems (when I have the functionality...):
+Or... maybe try my first game, on Google Play, and perhaps buy some gems:
 <br/>
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
