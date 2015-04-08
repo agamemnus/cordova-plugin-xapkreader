@@ -6,8 +6,8 @@ Table of Contents
 [Purpose](#purpose) <br/>
 [Donations?](#donations) <br/>
 [Tips](#tips) <br/>
-[Downloading and Initial Install](#Downloading and Initial Install) <br/>
-[Completing Installation](#Completing Installation) <br/>
+[Downloading and Initial Install](#downloading-and-Initial-Install) <br/>
+[Completing Installation](#completing-Installation) <br/>
 [Usage](#usage) <br/>
 [License](#license) <br/>
 
