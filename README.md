@@ -101,7 +101,7 @@ Completing Installation
  xapk_patch_file_size        : your patch version's file size. OPTIONAL. Set to 0 to skip the check.
 ````
 
-Usage
+# Usage
 ------
 
  Access your files via the content provider's expansion authority URI. For example:
