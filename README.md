@@ -1,14 +1,12 @@
 cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
 ================================================================
 
-Purpose
---------
+#Purpose
 
 Google Play limits APK file sizes to 50 megabytes. Google implemented APK expansion files as the current solution. This plugin allows you to more easily implement APK expansion files in Cordova, automating most of the things.
 
 
-Donations
-----------
+#Donations
 
 Yes, I put this near the top, so you, dear reader, wouldn't miss it. Perhaps you'd like to donate some money to my gittip account? https://www.gittip.com/agamemnus/ I also have a Paypal account: agamemnus at flyingsoftgames dot com.
 
@@ -17,8 +15,7 @@ Or... maybe try my first game on Google Play, and perhaps buy some gems:
 https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
 
-Tips
------
+#Tips
 
 * You can test your expansion files by adding them to Android/obb/package.name/, as described here:  http://developer.android.com/google/play/expansion-files.html#Testing
 
@@ -37,8 +34,7 @@ Tips
 * Uninstalling the plugin will not remove the provider tag in AndroidManifest.xml, or any "config_munge" values in android.json.
 
 
-Downloading and Initial Install
----------------------------------
+#Downloading and Initial Install
 
 NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](https://github.com/agamemnus/cordova-plugin-xapkreader/blob/gh-pages/media_plugin_workaround.txt) for more details.
 
@@ -55,8 +51,7 @@ plugman install --platform android --project . --plugin https://github.com/agame
 ````
 
 
-Completing Installation
-------------------------
+#Completing Installation
 
  To complete installation:
  
@@ -102,15 +97,13 @@ Completing Installation
 ````
 
 #Usage
-------
 
  Access your files via the content provider's expansion authority URI. For example:
  
  ``<img src="content://com.sample.expansion/myfile.png">``
 
 
-License (for any non-Android SDK parts...)
----------
+#License (for any non-Android SDK parts...)
 
 The MIT License (MIT)
 
