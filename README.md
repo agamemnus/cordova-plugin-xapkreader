@@ -72,7 +72,7 @@ Completing Installation
  android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
  ````
  
- 5) You must specify an [expansion authority URI](http://developer.android.com/guide/topics/manifest/provider-element.html#auth) (to reference files [see Usage], and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
+ 5) You must specify an [expansion authority URI](http://developer.android.com/guide/topics/manifest/provider-element.html#auth) (to reference files [see Usage](http://agamemnus.github.io/cordova-plugin-xapkreader/README.md#Usage), and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
  
  5b) (INFO) the expansion authority URI is a public resource accessible by any other Android program. You can specify what you want to name it. It **NOT** the project or package name! Make sure to make the expansion authority URI unique enough to avoid collisions. You may want to use a URI like "com.myprojectname.expansion" to make sure it is unique.
 
