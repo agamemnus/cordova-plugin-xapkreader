@@ -17,7 +17,7 @@
 8) Add a zip STORE named main.x.com.testproject.obb into "Phone/Android/obb/com.testproject/". (e.g.: main.1.com.testproject.obb)
 
 9) Modify android.json:
-a) Change the xapk_expansion_authority string value from "com.sample.expansion" to "com.testproject.expansion".
+a) Change the xapk_expansion_authority string value from "com.test.expansion" to "com.testproject.expansion".
 b) Modify xapk_google_play_public_key from "YOUR_GOOGLE_PLAY_LICENSE_KEY" to your Google Play public key.
 
 10) Add this to /platforms/android/project.properties:
