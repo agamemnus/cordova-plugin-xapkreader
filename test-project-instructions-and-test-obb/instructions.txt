@@ -4,9 +4,9 @@
 
 2) (Command line) C:
 
-3) (Command line) cordova create C:/testproject com.testproject TestProject
+3) (Command line) cordova create C:/myproject com.myproject MyProject
 
-4) (Command line) cd C:/testproject
+4) (Command line) cd C:/myproject
 
 5) (Command line) cordova platform add android
 
@@ -14,15 +14,15 @@
 
 7) Create a STORE zip with some file (a funny image, perhaps).
 
-8) Add a zip STORE named main.x.com.testproject.obb into "Phone/Android/obb/com.testproject/". (e.g.: main.1.com.testproject.obb)
+8) Add a zip STORE named main.x.com.myproject.obb into "Phone/Android/obb/com.myproject/". (e.g.: main.1.com.myproject.obb)
 
 9) Modify android.json:
-a) Change the xapk_expansion_authority string value from "com.test.expansion" to "com.testproject.expansion".
+a) Change the xapk_expansion_authority string value from "com.test.expansion" to "com.myproject.expansion".
 b) Modify xapk_google_play_public_key from "YOUR_GOOGLE_PLAY_LICENSE_KEY" to your Google Play public key.
 
 10) Add this to /platforms/android/project.properties:
 android.library.reference.1=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
 
-11) Access the funny image like this: <img src="content://com.testproject.expansion/hoarder.png">. Change the /index.html file to add this line.
+11) Access the funny image like this: <img src="content://com.myproject.expansion/hoarder.png">. Change the /index.html file to add this line.
 
 12) (Command line) cordova run
