@@ -71,7 +71,7 @@ plugman install --platform android --project . --plugin https://github.com/agame
  
  3) (INFO) The android SDK ``play_apk_expansion`` and ``play_licensing`` libraries are needed for this plugin, but they are already supplied, included, and configured in this plugin in the plugin's android-sdk directory.
  
- 4) You must modify project.properties inside ``/platforms/android/`` to add the library reference. For example, if you add the android-sdk folder to your ROOT directory (the default install):
+ 4) You must modify project.properties inside ``/platforms/android/`` to add the library reference. E.G.: if you add the android-sdk folder to your ROOT directory (the default install):
  
  ````
  android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
@@ -81,13 +81,13 @@ plugman install --platform android --project . --plugin https://github.com/agame
  
  5b) (INFO) the expansion authority URI is a public resource accessible by any other Android program. You can specify what you want to name it. It **NOT** the project or package name! Make sure to make the expansion authority URI unique enough to avoid collisions. You may want to use a URI like "com.myprojectname.expansion" to make sure it is unique.
 
- 5c) In android.json, look for and modify ``com.sample.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
+ 5c) In android.json, look for and modify ``com.test.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
  ````
   "res/values/xapkreader.xml": {
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<string name=\"xapk_expansion_authority\">com.sample.expansion</string>",
+                            "xml": "<string name=\"xapk_expansion_authority\">com.test.expansion</string>",
                             "count": 1
                         },
                         {
@@ -98,7 +98,7 @@ plugman install --platform android --project . --plugin https://github.com/agame
  
  5d) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in ``/platform/android/res/values/xapkreader.xml``:
 ````
- xapk_expansion_authority    : the expansion authority URI for the content provider. (eg: com.sample.expansion)
+ xapk_expansion_authority    : the expansion authority URI for the content provider. (eg: com.test.expansion)
  xapk_application_public_key : your application's Google Play public key.
  xapk_main_version           : your file's main version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "main".
  xapk_patch_version          : your file's patch version. OPTIONAL. Set to 0 to check the expansion directory for the first matched file starting with "patch".
@@ -108,9 +108,9 @@ plugman install --platform android --project . --plugin https://github.com/agame
 
 #Usage
 
- Access your files via the content provider's expansion authority URI. For example:
+ Access your files via the content provider's expansion authority URI. E.G.:
  
- ``<img src="content://com.sample.expansion/myfile.png">``
+ ``<img src="content://com.test.expansion/myfile.png">``
 
 
 #License (for any non-Android SDK parts...)
