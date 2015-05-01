@@ -49,7 +49,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  boolean allExpansionFilesKnownAsDelivered (int[] versionList, long[] fileSizeList) {
   for (int i = 0; i < 2; i++) {
    // If the version number is 0, we don't know if all expansion files were delivered, so return false.
-   if (versionList[i] == 0) false;
+   if (versionList[i] == 0) return false;
    String fileName = Helpers.getExpansionAPKFileName(this, (i == 0), versionList[i]);
    // If the file doesn't exist or has the wrong file size, consider the files to be undelivered.
    if (!validateFile(this, fileName, fileSizeList[i], (fileSizeList[i] != 0))) {
