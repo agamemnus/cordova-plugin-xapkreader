@@ -46,9 +46,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   return true;
  }
  
+ // Determine whether we know if all the expansion files were delivered.
  boolean allExpansionFilesKnownAsDelivered (int[] versionList, long[] fileSizeList) {
   for (int i = 0; i < 2; i++) {
-   // If the version number is 0, we don't know if all expansion files were delivered, so return false.
+   // If the version number is 0, we don't know if all expansion files were delivered, so return value should .
    if (versionList[i] == 0) return false;
    String fileName = Helpers.getExpansionAPKFileName(this, (i == 0), versionList[i]);
    // If the file doesn't exist or has the wrong file size, consider the files to be undelivered.
@@ -174,8 +175,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    // Dismiss progress dialog.
    mProgressDialog.dismiss ();
    
-   // Load the files in and finish the activity.
-   allExpansionFilesDelivered (versionList, fileSizeList);
+   // If something wrong happened with the download, send a soft log error.
+   allExpansionFilesKnownAsDelivered (versionList, fileSizeList);
+   
+   // Finish the activity.
    finish ();
    return;
   }
