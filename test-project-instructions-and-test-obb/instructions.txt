@@ -21,7 +21,7 @@ a) Change the xapk_expansion_authority string value from "com.test.expansion" to
 b) Modify xapk_google_play_public_key from "YOUR_GOOGLE_PLAY_LICENSE_KEY" to your Google Play public key.
 
 10) Add this to /platforms/android/project.properties:
-android.library.reference.1=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
+android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
 
 11) Access the funny image like this: <img src="content://com.myproject.expansion/hoarder.png">. Change the /index.html file to add this line.
 
