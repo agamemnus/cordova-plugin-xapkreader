@@ -10,6 +10,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Messenger;
+import android.content.pm.Signature;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
+
 // <Workaround for Cordova/Crosswalk flickering status bar bug./>
 import android.view.WindowManager;
 // <Workaround for Cordova/Crosswalk flickering status bar bug./>
@@ -24,6 +28,10 @@ import com.google.android.vending.expansion.downloader.IDownloaderService;
 import com.google.android.vending.expansion.downloader.IStub;
 
 import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.security.cert.CertificateFactory;
 
 public class XAPKDownloaderActivity extends Activity implements IDownloaderClient {
  private IStub mDownloaderClientStub;
@@ -95,14 +103,17 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    
    PendingIntent pendingIntent = PendingIntent.getActivity (this, 0, notifierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
    
+   // We can't attempt downloading the files with a debug signature.
+   if (signatureIsDebug(this)) {Log.v (LOG_TAG, "Using debug signature: no download is possible."); finish (); return;}
+   
    // Start the download service, if required.
-   Log.v (LOG_TAG, "Start the download service.");
+   Log.v (LOG_TAG, "Starting the download service.");
    int startResult = DownloaderClientMarshaller.startDownloadServiceIfRequired (this, pendingIntent, XAPKDownloaderService.class);
    
    if (startResult == DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED) {Log.v (LOG_TAG, "No download required."); finish (); return;}
    
    // If download has started, initialize activity to show progress.
-   Log.v (LOG_TAG, "Initialize activity to show progress.");
+   Log.v (LOG_TAG, "Initializing activity to show progress.");
    // Instantiate a member instance of IStub.
    mDownloaderClientStub = DownloaderClientMarshaller.CreateStub (this, XAPKDownloaderService.class);
    // Shows download progress.
@@ -150,7 +161,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  
  @Override public void onDownloadProgress (DownloadProgressInfo progress) {
   long percents = progress.mOverallProgress * 100 / progress.mOverallTotal;
-  Log.v (LOG_TAG, "DownloadProgress:" + Long.toString(percents) + "%");
+  Log.v (LOG_TAG, "DownloadProgress: " + Long.toString(percents) + "%");
   mProgressDialog.setProgress((int) percents);
  }
 
@@ -189,5 +200,32 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   alert.setMessage (xmlData.getString("xapk_text_download_failed", ""));
   alert.setNeutralButton (xmlData.getString("xapk_text_close", ""), null);
   alert.show ();
+ }
+ 
+ 
+ // Find out if we're in a debug or release build.
+ // Debug builds can't get downloads from Google Play. We need to know that before starting DownloaderClientMarshaller.
+ // Thanks to Omar Rehman: http://stackoverflow.com/a/11535593/1136569.
+ private static final String DEBUG_DN = "CN=Android Debug";
+ private boolean signatureIsDebug (Context ctx) {
+  boolean isDebug = false;
+  try {
+   PackageInfo pinfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(),PackageManager.GET_SIGNATURES);
+   Signature signatures[] = pinfo.signatures;
+    CertificateFactory cf = CertificateFactory.getInstance("X.509");
+    for (int i = 0; i < signatures.length; i++) {
+     ByteArrayInputStream stream = new ByteArrayInputStream(signatures[i].toByteArray());
+     X509Certificate cert = (X509Certificate) cf.generateCertificate(stream);       
+     isDebug = cert.getSubjectX500Principal().toString().contains(DEBUG_DN);
+     if (isDebug) break;
+    }
+   }
+   catch (NameNotFoundException e) {
+    // The "isDebug" variable will remain false.
+  }
+  catch (CertificateException e) {
+   // The "isDebug" variable will remain false.
+  }
+  return isDebug;
  }
 }
