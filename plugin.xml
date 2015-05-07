@@ -56,7 +56,6 @@
   
   <config-file target="AndroidManifest.xml" parent="application">
    <activity android:name="com.flyingsoftgames.xapkreader.XAPKDownloaderActivity" android:label="@string/app_name" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
-    <intent-filter></intent-filter>
    </activity>
    <service android:name="com.flyingsoftgames.xapkreader.XAPKDownloaderService" />
    <receiver android:name="com.flyingsoftgames.xapkreader.XAPKAlarmReceiver" />
