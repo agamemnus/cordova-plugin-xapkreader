@@ -1,4 +1,0 @@
-dependencies {
- debugCompile project(path: '..:..:play_licensing:library',configuration: "debug")
- releaseCompile project(path: '..:..:play_licensing:library',configuration: "release")
-}
