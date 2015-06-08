@@ -1,4 +1,4 @@
 dependencies {
- debugCompile project(path: '..:..:play_licensing:library',configuration: "debug")
- releaseCompile project(path: '..:..:play_licensing:library',configuration: "release")
+    debugCompile project(path: ':com.flyingsoftgames.xapkreader:PARTIALPROJECTNAME-library',configuration: "debug")
+    releaseCompile project(path: ':com.flyingsoftgames.xapkreader:PARTIALPROJECTNAME-library',configuration: "release")
 }
