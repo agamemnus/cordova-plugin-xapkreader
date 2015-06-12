@@ -51,7 +51,7 @@ NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run
 Normally:
 
 ```
-cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git
+cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader
 ````
 
 With plugman:
