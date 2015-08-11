@@ -110,9 +110,15 @@ public class XAPKProvider extends ContentProvider {
   if (initIfNecessary () == false) throw new FileNotFoundException ();
   String path = uri.getEncodedPath ();
   if (path.startsWith("/")) path = path.substring (1);
-  AssetFileDescriptor result = mAPKExtensionFile.getAssetFileDescriptor (path);
-  if (result == null) throw new FileNotFoundException ();
-  return result;
+  AssetFileDescriptor result;
+  try {
+   result = mAPKExtensionFile.getAssetFileDescriptor (path);
+  } catch (Exception e) {
+   throw new FileNotFoundException();
+  }
+  //AssetFileDescriptor result = mAPKExtensionFile.getAssetFileDescriptor (path);
+  //if (result == null) throw new FileNotFoundException ();
+  //return result;
  }
  
  @Override public boolean onCreate () {return true;}
