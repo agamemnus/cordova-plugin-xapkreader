@@ -113,7 +113,7 @@ public class XAPKProvider extends ContentProvider {
   AssetFileDescriptor result;
   try {
    result = mAPKExtensionFile.getAssetFileDescriptor (path);
-  } catch(Exception e) {
+  } catch (Exception e) {
    throw new FileNotFoundException();
   }
   if (result == null) throw new FileNotFoundException ();
