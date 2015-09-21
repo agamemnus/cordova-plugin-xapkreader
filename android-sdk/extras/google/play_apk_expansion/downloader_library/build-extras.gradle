@@ -1,4 +1,4 @@
 dependencies {
-    debugCompile project(path: ':com.flyingsoftgames.xapkreader:PARTIALPROJECTNAME-library',configuration: "debug")
-    releaseCompile project(path: ':com.flyingsoftgames.xapkreader:PARTIALPROJECTNAME-library',configuration: "release")
+    debugCompile project(path: ':com.flyingsoftgames.xapkreader:library',configuration: "debug")
+    releaseCompile project(path: ':com.flyingsoftgames.xapkreader:library',configuration: "release")
 }
