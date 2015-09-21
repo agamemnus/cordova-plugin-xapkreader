@@ -9,7 +9,7 @@
  
  <platform name="android">
   
-  <dependency id="cordova-plugin-googleplay.services" />
+  <dependency id="com.google.play.services" />
   
   <config-file target="res/xml/config.xml" parent="/*">
    <feature name="XAPKReader">
