@@ -108,8 +108,11 @@ plugman install --platform android --project . --plugin https://github.com/agame
 ````
 
 6) Importantly, for Cordova 5 and above, there is a  whitelist plugin by default. As of 9/22/2015, it will interfere with correct functioning of expansion files and some other types of files. (``cdvfile://`` and ``content://``) Currently, there are three ways of dealing with the issue:
+
 a) Download and install my own whitelist with a tentative patch: https://github.com/agamemnus/cordova-plugin-whitelist.
+
 b) Add a meta tag to your index.html file (and perhaps other html files?): ``<meta http-equiv="Content-Security-Policy" content="* * 'self' default-src 'unsafe-inline' 'unsafe-eval' http://* https://* data: cdvfile://* content://*;">``
+
 c) Add the following to ``[root]/config.xml``:
 ````
     <allow-navigation href="*://*/*"/>
