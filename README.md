@@ -9,6 +9,7 @@ Table of Contents
 [Downloading and Initial Install](#downloading-and-initial-install) <br/>
 [Completing Installation](#completing-installation) <br/>
 [Usage](#usage) <br/>
+[OBB Files](#obb-files) <br/>
 [License](#license) <br/>
 
 #Purpose
@@ -106,12 +107,27 @@ plugman install --platform android --project . --plugin https://github.com/agame
  xapk_patch_file_size        : your patch version's file size. OPTIONAL. Set to 0 to skip the check.
 ````
 
+6) Importantly, for Cordova 5 and above, there is a  whitelist plugin by default. As of 9/22/2015, it will interfere with correct functioning of expansion files and some other types of files. (``cdvfile://`` and ``content://``) Currently, there are three ways of dealing with the issue:
+a) Download and install my own whitelist with a tentative patch: https://github.com/agamemnus/cordova-plugin-whitelist.
+b) Add a meta tag to your index.html file (and perhaps other html files?): ``<meta http-equiv="Content-Security-Policy" content="* * 'self' default-src 'unsafe-inline' 'unsafe-eval' http://* https://* data: cdvfile://* content://*;">``
+c) Add the following to ``[root]/config.xml``:
+````
+    <allow-navigation href="*://*/*"/>
+    <allow-intent href="*" />
+    <access origin="*" />
+    <access origin="content:///*" />
+    <access origin="cdvfile:///*" />
+````
+
 #Usage
 
  Access your files via the content provider's expansion authority URI. E.G.:
  
  ``<img src="content://com.test.expansion/myfile.png">``
 
+#OBB files
+
+Make sure your OBB is a STORE and uses the latest zip methods. I use 7zip, which shows "version 20" in the file properties. Some zip programs may generate zips that, when uploaded, to the Google Play Developer Console, come back as corrupt OBBs.
 
 #License (for any non-Android SDK parts...)
 
