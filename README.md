@@ -6,7 +6,6 @@ cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
 
 Table of Contents
 ------------------
-[NOTICE](#notice) <br/>
 [Purpose](#purpose) <br/>
 [Donations?](#donations) <br/>
 [Tips](#tips) <br/>
