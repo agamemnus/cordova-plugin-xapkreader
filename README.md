@@ -58,7 +58,7 @@ cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#co
 With plugman:
 
 ````
-plugman install --platform android --project . --plugin https://github.com/agamemnus/cordova-plugin-xapkreader.git
+plugman install --platform android --project . --plugin https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-5.3.1
 ````
 
 
