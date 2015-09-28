@@ -72,17 +72,11 @@ plugman install --platform android --project . --plugin https://github.com/agame
  
  3) (INFO) The android SDK ``play_apk_expansion`` and ``play_licensing`` libraries are needed for this plugin, but they are already supplied, included, and configured in this plugin in the plugin's android-sdk directory.
  
- 4) You must modify project.properties inside ``/platforms/android/`` to add the library reference. E.G.: if you add the android-sdk folder to your ROOT directory (the default install):
+ 4) You must specify an [expansion authority URI](http://developer.android.com/guide/topics/manifest/provider-element.html#auth) (to reference files [see Usage](#usage), and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
  
- ````
- android.library.reference.2=../../plugins/com.flyingsoftgames.xapkreader/android-sdk/extras/google/play_apk_expansion/downloader_library
- ````
- 
- 5) You must specify an [expansion authority URI](http://developer.android.com/guide/topics/manifest/provider-element.html#auth) (to reference files [see Usage](#usage), and to avoid conflicting provider problems) and your application's Google Play public license key. This information is stored in ``/plugins/android.json``, which then modifies ``/platform/android/res/values/xapkreader.xml``.
- 
- 5b) (INFO) the expansion authority URI is a public resource accessible by any other Android program. You can specify what you want to name it. It **NOT** the project or package name! Make sure to make the expansion authority URI unique enough to avoid collisions. You may want to use a URI like "com.myprojectname.expansion" to make sure it is unique.
+ 4b) (INFO) the expansion authority URI is a public resource accessible by any other Android program. You can specify what you want to name it. It **NOT** the project or package name! Make sure to make the expansion authority URI unique enough to avoid collisions. You may want to use a URI like "com.myprojectname.expansion" to make sure it is unique.
 
- 5c) In android.json, look for and modify ``com.test.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
+ 4c) In android.json, look for and modify ``com.test.expansion`` and ``YOUR_GOOGLE_PLAY_LICENSE_KEY`` in this text:
  ````
   "res/values/xapkreader.xml": {
                 "parents": {
@@ -97,7 +91,7 @@ plugman install --platform android --project . --plugin https://github.com/agame
                         }
  ````
  
- 5d) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in ``/platform/android/res/values/xapkreader.xml``:
+ 4d) If you deleted ``/platforms/android/ant-build`` and ``/platforms/android/ant-gen``, android.json will then append to the values in ``/platform/android/res/values/xapkreader.xml``:
 ````
  xapk_expansion_authority    : the expansion authority URI for the content provider. (eg: com.test.expansion)
  xapk_application_public_key : your application's Google Play public key.
@@ -107,7 +101,7 @@ plugman install --platform android --project . --plugin https://github.com/agame
  xapk_patch_file_size        : your patch version's file size. OPTIONAL. Set to 0 to skip the check.
 ````
 
-6) Importantly, for Cordova 5 and above, there is a  whitelist plugin by default. As of 9/22/2015, it will interfere with correct functioning of expansion files and some other types of files. (``cdvfile://`` and ``content://``) Currently, there are three ways of dealing with the issue:
+5) Importantly, for Cordova 5 and above, there is a  whitelist plugin by default. As of 9/22/2015, it will interfere with correct functioning of expansion files and some other types of files. (``cdvfile://`` and ``content://``) Currently, there are three ways of dealing with the issue:
 
 a) Download and install my own whitelist with a tentative patch: https://github.com/agamemnus/cordova-plugin-whitelist.
 
