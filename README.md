@@ -19,7 +19,7 @@ Google Play limits APK file sizes to 50 megabytes. Google implemented APK expans
 
 #Donations
 
-Yes, I put this near the top, so you, dear reader, wouldn't miss it. Perhaps you'd like to donate some money to my gittip account? https://www.gittip.com/agamemnus/ I also have a Paypal account: agamemnus at flyingsoftgames dot com.
+Yes, I put this near the top, so you, dear reader, wouldn't miss it. Perhaps you'd like to donate some money to my gittip account? https://www.gittip.com/agamemnus/ I also have a Paypal account: __agamemnus at flyingsoftgames dot com__.
 
 Or... maybe try my first game on Google Play, and perhaps buy some gems:
 <br/>
