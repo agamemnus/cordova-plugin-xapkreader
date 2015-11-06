@@ -1,4 +1,4 @@
-NOTICE: this version does not work with Gradle. I recommend using the 5.3.1 branch of this plugin (or above) along with Cordova 5.3.1 and Android platform 4.1.1. https://github.com/agamemnus/cordova-plugin-xapkreader/tree/cordova-5.3.1.
+NOTICE: This version does not work with Gradle. I recommend using the 5.3.1 branch of this plugin (or above) along with Cordova 5.3.1 and Android platform 4.1.1. https://github.com/agamemnus/cordova-plugin-xapkreader/tree/cordova-5.3.1.
 ================================================================
 
 cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
