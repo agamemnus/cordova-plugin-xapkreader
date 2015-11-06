@@ -1,3 +1,6 @@
+NOTICE: I suggest always using the latest version of this plugin. This version is not the latest.
+================================================================
+
 cordova-plugin-xapkreader (Agamemnus/Flyingsoft Games edition)
 ================================================================
 
