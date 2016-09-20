@@ -17,20 +17,32 @@
     <param name="onload" value="true" />
    </feature>
   </config-file>
-  
+
+  <preference name="XAPK_EXPANSION_AUTHORITY" default="$PACKAGE_NAME" />
+  <preference name="XAPK_PUBLIC_KEY" />
+  <preference name="XAPK_TEXT_DL_ASSETS" default="Downloading assets…" />
+  <preference name="XAPK_TEXT_PR_ASSETS" default="Preparing assets…" />
+  <preference name="XAPK_TEXT_DL_FAILED" default="Download failed." />
+  <preference name="XAPK_TEXT_ERROR" default="Error." />
+  <preference name="XAPK_TEXT_CLOSE" default="Close." />
+  <preference name="XAPK_MAIN_VERSION" default="0" />
+  <preference name="XAPK_PATCH_VERSION" default="0" />
+  <preference name="XAPK_MAIN_FILESIZE" default="0" />
+  <preference name="XAPK_PATCH_FILESIZE" default="0" />
+
   <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
-   <string name="xapk_expansion_authority">com.test.expansion</string>
-   <string name="xapk_google_play_public_key">YOUR_GOOGLE_PLAY_LICENSE_KEY</string>
-   <string name="xapk_text_downloading_assets">Downloading assets…</string>
-   <string name="xapk_text_preparing_assets">Preparing assets…</string>
-   <string name="xapk_text_download_failed">Download failed.</string>
-   <string name="xapk_text_error">Error.</string>
-   <string name="xapk_text_close">Close.</string>
-   <integer name="xapk_main_version">0</integer>
-   <integer name="xapk_patch_version">0</integer>
-   <integer name="xapk_main_file_size">0</integer>
-   <integer name="xapk_patch_file_size">0</integer>
+   <string name="xapk_expansion_authority">$XAPK_EXPANSION_AUTHORITY</string>
+   <string name="xapk_google_play_public_key">$XAPK_PUBLIC_KEY</string>
+   <string name="xapk_text_downloading_assets">$XAPK_TEXT_DL_ASSETS</string>
+   <string name="xapk_text_preparing_assets">$XAPK_TEXT_PR_ASSETS</string>
+   <string name="xapk_text_download_failed">$XAPK_TEXT_DL_FAILED</string>
+   <string name="xapk_text_error">$XAPK_TEXT_ERROR</string>
+   <string name="xapk_text_close">$XAPK_TEXT_CLOSE</string>
+   <integer name="xapk_main_version">$XAPK_MAIN_VERSION</integer>
+   <integer name="xapk_patch_version">$XAPK_PATCH_VERSION</integer>
+   <integer name="xapk_main_file_size">$XAPK_MAIN_FILESIZE</integer>
+   <integer name="xapk_patch_file_size">$XAPK_PATCH_FILESIZE</integer>
   </config-file>
   
   <source-file src="src/android/XAPKAlarmReceiver.java"      target-dir="src/com/flyingsoftgames/xapkreader" />
