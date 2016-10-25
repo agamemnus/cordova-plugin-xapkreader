@@ -57,6 +57,8 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  // Determine whether we know if all the expansion files were delivered.
  boolean allExpansionFilesKnownAsDelivered (int[] versionList, long[] fileSizeList) {
   for (int i = 0; i < 2; i++) {
+   // A -1 indicates we're not using this file (patch/main).
+   if (versionList[i] == -1) continue;
    // If the version number is 0, we don't know if all expansion files were delivered, so return value should .
    if (versionList[i] == 0) return false;
    String fileName = Helpers.getExpansionAPKFileName(this, (i == 0), versionList[i]);
