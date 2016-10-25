@@ -75,10 +75,12 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  
  @Override public void onCreate (Bundle savedInstanceState) {
   
-  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
-  cordovaActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-  cordovaActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+  if (cordovaActivity != null) {
+   // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+   cordovaActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+   cordovaActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+   // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+  }
   
   super.onCreate (savedInstanceState);
   xmlData = getIntent().getExtras(); // savedInstanceState;
