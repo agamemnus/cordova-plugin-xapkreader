@@ -100,6 +100,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    Intent notifierIntent = new Intent (XAPKDownloaderActivity.this, XAPKDownloaderActivity.this.getClass());
    notifierIntent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
    notifierIntent.setAction (launchIntent.getAction());
+   notifierIntent.putExtras (launchIntent.getExtras());
    
    if (launchIntent.getCategories() != null) {
     for (String category : launchIntent.getCategories()) {
