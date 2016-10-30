@@ -90,6 +90,11 @@ public class XAPKProvider extends ContentProvider {
    expansionAuthority  = bundle.getString("xapk_expansion_authority"   , "com.sample.expansion");
    xmlDataReceived = true;
    return null;
+  } else if (method.equals("download_completed")) {
+   // Re-initialize the content provider so that it can find the expansion file.
+   mInit = false;
+   mAPKExtensionFile = null;
+   initIfNecessary();
   }
   return null;
  }
