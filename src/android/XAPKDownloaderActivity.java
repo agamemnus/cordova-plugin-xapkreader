@@ -131,6 +131,16 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    mProgressDialog.setProgressStyle (ProgressDialog.STYLE_HORIZONTAL);
    mProgressDialog.setMessage (xmlData.getString("xapk_text_downloading_assets", ""));
    mProgressDialog.setCancelable (false);
+   int max = 0;
+   for (int i = 0; i < fileSizeList.length; i++) {
+    if (fileSizeList[i] > 0) {
+     max += fileSizeList[i];
+    }
+   }
+   if (max > 0) {
+    mProgressDialog.setMax((int) (fileSizeList[0] / 1024 / 1024));
+   }
+   mProgressDialog.setProgressNumberFormat("%1dMB /%2dMB");
    mProgressDialog.show ();
    return;
    
@@ -172,7 +182,11 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  @Override public void onDownloadProgress (DownloadProgressInfo progress) {
   long percents = progress.mOverallProgress * 100 / progress.mOverallTotal;
   Log.v (LOG_TAG, "DownloadProgress: " + Long.toString(percents) + "%");
-  mProgressDialog.setProgress((int) percents);
+  mProgressDialog.setProgress((int) progress.mOverallProgress / 1024 / 1024);
+  int max = (int) progress.mOverallTotal / 1024 / 1024;
+  if (mProgressDialog.getMax() != max) {
+   mProgressDialog.setMax(max);
+  }
  }
 
  @Override public void onDownloadStateChanged (int newState) {
