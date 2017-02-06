@@ -8,8 +8,8 @@
  <engines><engine name="cordova" version=">=4.1.1" /></engines>
  
  <platform name="android">
-  
-  <dependency id="com.google.play.services" />
+ 
+  <framework src="com.google.android.gms:play-services-base:+" />
   
   <config-file target="res/xml/config.xml" parent="/*">
    <feature name="XAPKReader">
