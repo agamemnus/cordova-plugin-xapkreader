@@ -34,6 +34,8 @@ public class V3CustomNotification implements DownloadNotification.ICustomNotific
     long mTotalBytes = -1;
     long mCurrentBytes = -1;
     long mTimeRemaining;
+    boolean mOngoing = true;
+    boolean mAutoCancel = false;
     PendingIntent mPendingIntent;
     Notification mNotification = new Notification();
 
@@ -63,35 +65,45 @@ public class V3CustomNotification implements DownloadNotification.ICustomNotific
 
         n.icon = mIcon;
 
-        n.flags |= Notification.FLAG_ONGOING_EVENT;
+        if (mOngoing) {
+            n.flags |= Notification.FLAG_ONGOING_EVENT;
+        } else {
+            n.flags &= ~Notification.FLAG_ONGOING_EVENT;
+        }
+
+        if (mAutoCancel) {
+            n.flags |= Notification.FLAG_AUTO_CANCEL;
+        } else {
+            n.flags &= ~Notification.FLAG_AUTO_CANCEL;
+        }
 
         if (android.os.Build.VERSION.SDK_INT > 10) {
             n.flags |= Notification.FLAG_ONLY_ALERT_ONCE; // only matters for
-                                                          // Honeycomb
+            // Honeycomb
         }
 
         // Build the RemoteView object
         RemoteViews expandedView = new RemoteViews(
-                c.getPackageName(),
-                R.layout.status_bar_ongoing_event_progress_bar);
+            c.getPackageName(),
+            R.layout.status_bar_ongoing_event_progress_bar);
 
         expandedView.setTextViewText(R.id.title, mTitle);
         // look at strings
         expandedView.setViewVisibility(R.id.description, View.VISIBLE);
         expandedView.setTextViewText(R.id.description,
-                Helpers.getDownloadProgressString(mCurrentBytes, mTotalBytes));
+                                     Helpers.getDownloadProgressString(mCurrentBytes, mTotalBytes));
         expandedView.setViewVisibility(R.id.progress_bar_frame, View.VISIBLE);
         expandedView.setProgressBar(R.id.progress_bar,
-                (int) (mTotalBytes >> 8),
-                (int) (mCurrentBytes >> 8),
-                mTotalBytes <= 0);
+                                    (int) (mTotalBytes >> 8),
+                                    (int) (mCurrentBytes >> 8),
+                                    mTotalBytes <= 0);
         expandedView.setViewVisibility(R.id.time_remaining, View.VISIBLE);
         expandedView.setTextViewText(
-                R.id.time_remaining,
-                c.getString(R.string.time_remaining_notification,
+            R.id.time_remaining,
+            c.getString(R.string.time_remaining_notification,
                         Helpers.getTimeRemaining(mTimeRemaining)));
         expandedView.setTextViewText(R.id.progress_text,
-                Helpers.getDownloadProgressPercent(mCurrentBytes, mTotalBytes));
+                                     Helpers.getDownloadProgressPercent(mCurrentBytes, mTotalBytes));
         expandedView.setImageViewResource(R.id.appIcon, mIcon);
         n.contentView = expandedView;
         n.contentIntent = mPendingIntent;
@@ -113,4 +125,9 @@ public class V3CustomNotification implements DownloadNotification.ICustomNotific
         mTimeRemaining = timeRemaining;
     }
 
+    @Override
+    public void setOngoing(boolean ongoing) { mOngoing = ongoing; }
+
+    @Override
+    public void setAutoCancel(boolean autoCancel) { mAutoCancel = autoCancel; }
 }
