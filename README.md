@@ -132,11 +132,13 @@ If you are using cordova-plugin-splashscreen, this plugin, by default will preve
    
 To avoid this behavior, you'll want to set xapk_auto_download to false and invoke the plugin explicitly within your Javascript code by calling XAPKReader.downloadExpansionIfAvailable.
   
-1) Set the variable is to pass the argument 
+1) Add the following argument when running **cordova plugin add ... ** to install the plugin. 
 ````
 --variable XAPK_AUTO_DOWNLOAD=false 
 ````
-when you run **cordova plugin add** (note, you can do this for XAPK_EXPANSION_AUTHORITY and XAPK_PUBLIC_KEY as well to set these variables on installation).  If you've already installed the plugin, you can simply remove it and re-added it with the --variable argument.
+(Note: you can do this for XAPK_EXPANSION_AUTHORITY and XAPK_PUBLIC_KEY as well to set these variables on installation).
+
+If you've already installed the plugin, you can simply remove it and re-added it with the --variable argument.
 
 2) Add the following in your javascript code at the earliest point where you know the splash page has been removed (either by explicitly hiding it orbased on the timeout you set for the splashpage).
 
