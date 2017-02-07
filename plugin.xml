@@ -8,8 +8,12 @@
  <engines><engine name="cordova" version=">=4.1.1" /></engines>
  
  <platform name="android">
-  
-  <dependency id="com.google.play.services" />
+ 
+  <framework src="com.google.android.gms:play-services-base:+" />
+ 
+  <js-module src="www/XAPKReader.js" name="XAPKReader">
+   <clobbers target="XAPKReader"/>
+  </js-module>
   
   <config-file target="res/xml/config.xml" parent="/*">
    <feature name="XAPKReader">
@@ -29,6 +33,7 @@
   <preference name="XAPK_PATCH_VERSION" default="0" />
   <preference name="XAPK_MAIN_FILESIZE" default="0" />
   <preference name="XAPK_PATCH_FILESIZE" default="0" />
+  <preference name="XAPK_AUTO_DOWNLOAD" default="true" />
 
   <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
@@ -43,6 +48,7 @@
    <integer name="xapk_patch_version">$XAPK_PATCH_VERSION</integer>
    <integer name="xapk_main_file_size">$XAPK_MAIN_FILESIZE</integer>
    <integer name="xapk_patch_file_size">$XAPK_PATCH_FILESIZE</integer>
+   <bool name="xapk_auto_download">$XAPK_AUTO_DOWNLOAD</bool>
   </config-file>
   
   <source-file src="src/android/XAPKAlarmReceiver.java"      target-dir="src/com/flyingsoftgames/xapkreader" />

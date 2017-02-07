@@ -130,18 +130,18 @@ public class DownloadNotification implements IDownloaderClient {
                     ongoingEvent = true;
                     break;
             }
+
             mCurrentText = mContext.getString(stringDownloadID);
             mCurrentTitle = mLabel.toString();
-            mCurrentNotification.tickerText = mLabel + ": " + mCurrentText;
-            mCurrentNotification.icon = iconResource;
-            mCurrentNotification.setLatestEventInfo(mContext, mCurrentTitle, mCurrentText,
-                    mContentIntent);
-            if (ongoingEvent) {
-                mCurrentNotification.flags |= Notification.FLAG_ONGOING_EVENT;
-            } else {
-                mCurrentNotification.flags &= ~Notification.FLAG_ONGOING_EVENT;
-                mCurrentNotification.flags |= Notification.FLAG_AUTO_CANCEL;
-            }
+
+            mCustomNotification.setTicker(mLabel + ": " + mCurrentText);
+            mCustomNotification.setIcon(iconResource);
+            mCustomNotification.setTitle(mCurrentTitle);
+            mCustomNotification.setOngoing(ongoingEvent);
+            mCustomNotification.setAutoCancel(!ongoingEvent);
+
+            mCurrentNotification = mCustomNotification.updateNotification(mContext);
+
             mNotificationManager.notify(NOTIFICATION_ID, mCurrentNotification);
         }
     }
@@ -152,22 +152,15 @@ public class DownloadNotification implements IDownloaderClient {
         if (null != mClientProxy) {
             mClientProxy.onDownloadProgress(progress);
         }
-        if (progress.mOverallTotal <= 0) {
-            // we just show the text
-            mNotification.tickerText = mCurrentTitle;
-            mNotification.icon = android.R.drawable.stat_sys_download;
-            mNotification.setLatestEventInfo(mContext, mLabel, mCurrentText, mContentIntent);
-            mCurrentNotification = mNotification;
-        } else {
-            mCustomNotification.setCurrentBytes(progress.mOverallProgress);
-            mCustomNotification.setTotalBytes(progress.mOverallTotal);
-            mCustomNotification.setIcon(android.R.drawable.stat_sys_download);
-            mCustomNotification.setPendingIntent(mContentIntent);
-            mCustomNotification.setTicker(mLabel + ": " + mCurrentText);
-            mCustomNotification.setTitle(mLabel);
-            mCustomNotification.setTimeRemaining(progress.mTimeRemaining);
-            mCurrentNotification = mCustomNotification.updateNotification(mContext);
-        }
+        mCustomNotification.setCurrentBytes(progress.mOverallTotal > 0 ? progress.mOverallProgress : 0);
+        mCustomNotification.setTotalBytes(progress.mOverallTotal > 0 ? progress.mOverallTotal : 0);
+        mCustomNotification.setIcon(android.R.drawable.stat_sys_download);
+        mCustomNotification.setPendingIntent(mContentIntent);
+        mCustomNotification.setTicker(mLabel + ": " + mCurrentText);
+        mCustomNotification.setTitle(mLabel);
+        mCustomNotification.setTimeRemaining(progress.mTimeRemaining);
+        mCurrentNotification = mCustomNotification.updateNotification(mContext);
+
         mNotificationManager.notify(NOTIFICATION_ID, mCurrentNotification);
     }
 
@@ -186,13 +179,17 @@ public class DownloadNotification implements IDownloaderClient {
 
         void setTimeRemaining(long timeRemaining);
 
+        void setOngoing(boolean ongoing);
+
+        void setAutoCancel(boolean autoCancel);
+
         Notification updateNotification(Context c);
     }
 
     /**
      * Called in response to onClientUpdated. Creates a new proxy and notifies
      * it of the current state.
-     * 
+     *
      * @param msg the client Messenger to notify
      */
     public void setMessenger(Messenger msg) {
@@ -207,7 +204,7 @@ public class DownloadNotification implements IDownloaderClient {
 
     /**
      * Constructor
-     * 
+     *
      * @param ctx The context to use to obtain access to the Notification
      *            Service
      */
@@ -216,9 +213,9 @@ public class DownloadNotification implements IDownloaderClient {
         mContext = ctx;
         mLabel = applicationLabel;
         mNotificationManager = (NotificationManager)
-                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mCustomNotification = CustomNotificationFactory
-                .createCustomNotification();
+            .createCustomNotification();
         mNotification = new Notification();
         mCurrentNotification = mNotification;
 

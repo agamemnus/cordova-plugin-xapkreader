@@ -31,6 +31,8 @@ public class V14CustomNotification implements DownloadNotification.ICustomNotifi
     long mTotalKB = -1;
     long mCurrentKB = -1;
     long mTimeRemaining;
+    boolean mOngoing = true;
+    boolean mAutoCancel = false;
     PendingIntent mPendingIntent;
 
     @Override
@@ -68,16 +70,17 @@ public class V14CustomNotification implements DownloadNotification.ICustomNotifi
         }
         builder.setContentText(Helpers.getDownloadProgressString(mCurrentKB, mTotalKB));
         builder.setContentInfo(c.getString(R.string.time_remaining_notification,
-                Helpers.getTimeRemaining(mTimeRemaining)));
+                                           Helpers.getTimeRemaining(mTimeRemaining)));
         if (mIcon != 0) {
             builder.setSmallIcon(mIcon);
         } else {
             int iconResource = android.R.drawable.stat_sys_download;
             builder.setSmallIcon(iconResource);
         }
-        builder.setOngoing(true);
+        builder.setOngoing(mOngoing);
         builder.setTicker(mTicker);
         builder.setContentIntent(mPendingIntent);
+        builder.setAutoCancel(mAutoCancel);
         builder.setOnlyAlertOnce(true);
 
         return builder.getNotification();
@@ -97,5 +100,11 @@ public class V14CustomNotification implements DownloadNotification.ICustomNotifi
     public void setTimeRemaining(long timeRemaining) {
         mTimeRemaining = timeRemaining;
     }
+
+    @Override
+    public void setOngoing(boolean ongoing) { mOngoing = ongoing; }
+
+    @Override
+    public void setAutoCancel(boolean autoCancel) { mAutoCancel = autoCancel; }
 
 }
