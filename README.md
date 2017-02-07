@@ -10,6 +10,7 @@ Table of Contents
 [Completing Installation](#completing-installation) <br/>
 [Usage](#usage) <br/>
 [OBB Files](#obb-files) <br/>
+[Compatibility with cordova-plugin-splashscreen](#compatibility-with-cordova-plugin-splashscreen) <br/>
 [License](#license) <br/>
 
 #Purpose
@@ -125,6 +126,33 @@ c) Add the following to ``[root]/config.xml``:
 #OBB files
 
 Make sure your OBB is a STORE and uses the latest zip methods. I use 7zip, which shows "version 20" in the file properties. Some zip programs may generate zips that, when uploaded, to the Google Play Developer Console, come back as corrupt OBBs.
+
+#Compatibility with cordova-plugin-splashscreen
+If you are using cordova-plugin-splashscreen, this plugin, by default will prevent your splashscreen from appearing on Android.  This is due to the fact that the splashscreen plugin is wired to automatically hide the splashscreen after receiving a pause event.  When this plugin activates the download activity, the pause event is fired and the splashscreen is hidden.
+   
+To avoid this behavior, you'll want to set xapk_auto_download to false and invoke the plugin explicitly within your Javascript code by calling XAPKReader.downloadExpansionIfAvailable.
+  
+1) Add the following argument when running **cordova plugin add ... ** to install the plugin. 
+````
+--variable XAPK_AUTO_DOWNLOAD=false 
+````
+(Note: you can do this for XAPK_EXPANSION_AUTHORITY and XAPK_PUBLIC_KEY as well to set these variables on installation).
+
+If you've already installed the plugin, you can simply remove it and re-added it with the --variable argument.
+
+2) Add the following in your javascript code at the earliest point where you know the splash page has been removed (either by explicitly hiding it orbased on the timeout you set for the splashpage).
+
+````
+    // XAPKReader will only be defined (and should only be invoked) for the Android platform
+    if (window.XAPKReader) {
+      window.XAPKReader.downloadExpansionIfAvailable(function () {
+        console.log("Expansion file check/download success.");
+      }, function (err) {
+        console.log(err);
+        throw "Failed to download expansion file.";
+      })
+    }
+````
 
 #License (for any non-Android SDK parts...)
 
