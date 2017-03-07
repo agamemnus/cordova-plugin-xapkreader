@@ -52,12 +52,12 @@ NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run
 Essentially, two variables are required for the plugin to work: XAPK_EXPANSION_AUTHORITY (http://developer.android.com/guide/topics/manifest/provider-element.html#auth) and XAPK_PUBLIC_KEY (your application's Google Play public license key). You can either add them on install, or modify android.json to set them later.
 
 ```
-cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-6.5.0 --variable XAPK_EXPANSION_AUTHORITY="expansion_authority" --variable XAPK_PUBLIC_KEY="YOUR_GOOGLE_PLAY_LICENSE_KEY"
+cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-5.3.1-auto --variable XAPK_EXPANSION_AUTHORITY="expansion_authority" --variable XAPK_PUBLIC_KEY="YOUR_GOOGLE_PLAY_LICENSE_KEY"
 ```
 or
 
 ```
-cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-6.5.0
+cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-5.3.1-auto
 ```
 
 #Completing expansion file setup
