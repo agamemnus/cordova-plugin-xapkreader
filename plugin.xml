@@ -23,7 +23,7 @@
   </config-file>
 
   <preference name="XAPK_EXPANSION_AUTHORITY" default="$PACKAGE_NAME" />
-  <preference name="XAPK_PUBLIC_KEY" default="test" />
+  <preference name="XAPK_PUBLIC_KEY" default="YOUR_GOOGLE_PLAY_LICENSE_KEY" />
   <preference name="XAPK_TEXT_DL_ASSETS" default="Downloading assets…" />
   <preference name="XAPK_TEXT_PR_ASSETS" default="Preparing assets…" />
   <preference name="XAPK_TEXT_DL_FAILED" default="Download failed." />
