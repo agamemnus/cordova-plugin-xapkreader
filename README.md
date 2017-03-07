@@ -40,7 +40,7 @@ https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
 #Downloading and Initial Install
 
-NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](/cordova-5.3.1-auto/media_plugin_workaround.txt) for more details.
+NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](media_plugin_workaround.txt) for more details.
 
 Normally:
 
