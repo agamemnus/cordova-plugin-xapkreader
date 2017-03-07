@@ -15,7 +15,7 @@ Table of Contents
 
 #Purpose
 
-Google Play limits APK file sizes to 50 megabytes. Google implemented APK expansion files as the current solution. This plugin allows you to more easily implement APK expansion files in Cordova, automating most of the things.
+Google Play limits APK file sizes to 100 megabytes, as of March 7, 2017. Google implemented APK expansion files as the current solution, allowing developers to store 2GB each for both expansion files. This plugin allows you to more easily implement APK expansion files in Cordova, automating most of the things.
 
 
 #Donations
@@ -35,20 +35,12 @@ https://play.google.com/store/apps/details?id=com.flyingsoft.safari.jigsaw.free
 
 * As expected, contents in the patch file overwrite contents in the main file. If you need to update a small some file without making the user download let's say a gigabyte of data, you'd want to update the patch file, and store the rest of the data in the main file.
 
-* ~~Unfortunately, you can't see the version number of your expansion files when you upload them to Google Play. The version number Google Play assigns will be equal to the version of the APK itself at the time that you upload the main/patch expansion file version.~~ FORTUNATELY, in this plugin, it's not a problem, as you don't have to set the version number at all.
-
-* If you upload a new main or patch APK expansion file to Google Play, the old main or patch file will be deleted when Google Play updates the user's device. Theoretically.
-
-* ***When you upload an APK for the first time to Google Play, there will be no dialog to attach an expansion file. You will only see it on the second and subsequent times.***
-
-* When you upload a new APK version, don't forget to check that your APK expansions are actually included. If you don't see them as included in the pop-up, they aren't -- sometimes Google Play will clear that information, so you have to select the APK expansion from the dropdown again. (that you already uploaded, assuming you uploaded one.)
-
-* Uninstalling the plugin will not remove the provider tag in AndroidManifest.xml, or any "config_munge" values in android.json.
+* If you upload a new main or patch APK expansion file to Google Play, the old main or patch file will be deleted when Google Play updates the user's device.
 
 
 #Downloading and Initial Install
 
-NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](https://github.com/agamemnus/cordova-plugin-xapkreader/blob/gh-pages/media_plugin_workaround.txt) for more details.
+NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](/cordova-5.3.1-auto/media_plugin_workaround.txt) for more details.
 
 Normally:
 
