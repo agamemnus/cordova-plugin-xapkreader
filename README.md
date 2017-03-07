@@ -49,7 +49,7 @@ Alternatively, simply donate to the open source community. And here I would like
 
 NOTICE: APK expansion files (e.g.: audio files), as of 10/10/2014, cannot be run in conjunction with the Cordova Media plugin. Please see [media_plugin_workaround.txt](media_plugin_workaround.txt) for more details.
 
-Essentially, two variables are required for the plugin to work: XAPK_EXPANSION_AUTHORITY(http://developer.android.com/guide/topics/manifest/provider-element.html#auth) and XAPK_PUBLIC_KEY (your application's Google Play public license key). You can either add them on install, or modify android.json to set them later.
+Essentially, two variables are required for the plugin to work: XAPK_EXPANSION_AUTHORITY (http://developer.android.com/guide/topics/manifest/provider-element.html#auth) and XAPK_PUBLIC_KEY (your application's Google Play public license key). You can either add them on install, or modify android.json to set them later.
 
 ```
 cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-6.5.0 --variable XAPK_EXPANSION_AUTHORITY="expansion_authority" --variable XAPK_PUBLIC_KEY="YOUR_GOOGLE_PLAY_LICENSE_KEY"
@@ -141,7 +141,7 @@ To avoid this behavior, you'll want to set xapk_auto_download to false and invok
 
 If you've already installed the plugin, you can simply remove it and re-added it with the --variable argument.
 
-2) Add the following in your javascript code at the earliest point where you know the splash page has been removed (either by explicitly hiding it orbased on the timeout you set for the splashpage).
+2) Add the following in your javascript code at the earliest point where you know the splash page has been removed (either by explicitly hiding it or based on the timeout you set for the splashpage).
 
 ````
     // XAPKReader will only be defined (and should only be invoked) for the Android platform
