@@ -155,7 +155,8 @@ If you've already installed the plugin, you can simply remove it and re-added it
     }
 ````
 
-#License (for any non-Android SDK parts...)
+#License
+(for any non-Android SDK parts...)
 
 The MIT License (MIT)
 
