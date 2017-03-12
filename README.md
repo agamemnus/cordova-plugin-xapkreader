@@ -116,7 +116,8 @@ plugman install --platform android --project . --plugin https://github.com/agame
  ``<img src="content://com.test.expansion/myfile.png">``
 
 
-#License (for any non-Android SDK parts...)
+#License
+(for any non-Android SDK parts...)
 
 The MIT License (MIT)
 
