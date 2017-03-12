@@ -126,7 +126,8 @@ c) Add the following to ``[root]/config.xml``:
 
 Make sure your OBB is a STORE and uses the latest zip methods. I use 7zip, which shows "version 20" in the file properties. Some zip programs may generate zips that, when uploaded, to the Google Play Developer Console, come back as corrupt OBBs.
 
-#License (for any non-Android SDK parts...)
+#License
+(for any non-Android SDK parts...)
 
 The MIT License (MIT)
 
