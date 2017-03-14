@@ -108,7 +108,9 @@ public class XAPKProvider extends ContentProvider {
  
  public AssetFileDescriptor openAssetFile (Uri uri, String mode) throws FileNotFoundException {
   if (initIfNecessary () == false) throw new FileNotFoundException ();
-  String path = uri.getEncodedPath ();
+  // Use uri.getPath() instead of uri.getEncodedPath(), because the paths inside the ZIP
+  // file are filesystem paths, not url-encoded paths.
+  String path = uri.getPath ();
   if (path.startsWith("/")) path = path.substring (1);
   AssetFileDescriptor result;
   try {
