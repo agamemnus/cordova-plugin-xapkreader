@@ -27,6 +27,7 @@ import com.google.android.vending.expansion.downloader.IDownloaderClient;
 import com.google.android.vending.expansion.downloader.IDownloaderService;
 import com.google.android.vending.expansion.downloader.IStub;
 
+import org.apache.cordova.CordovaWebView;
 import java.io.File;
 import java.io.ByteArrayInputStream;
 import java.security.cert.CertificateException;
@@ -45,6 +46,9 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
  public static Activity cordovaActivity = null;
  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+ // The Cordova webview, so we can tell it to reload the page once the contents
+ // have been received.
+ public static CordovaWebView cordovaWebView = null;
  
  // The file may have been delivered by Google Play --- let's make sure it exists and it's the size we expect.
  static public boolean validateFile (Context ctx, String fileName, long fileSize, boolean checkFileSize) {
@@ -181,7 +185,18 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   ) {Log.v (LOG_TAG, "Downloading..."); return;}
   
   if (newState == STATE_COMPLETED) {
+   Log.v(LOG_TAG, "Download complete");
    mProgressDialog.setMessage (xmlData.getString("xapk_text_preparing_assets", ""));
+   if (cordovaWebView != null) {
+    // We need to reload the webview (if it's still open), in case
+    // it's already displaying some images from the expansion, as broken
+    // image links.
+    Log.v(LOG_TAG, "Reloading Cordova webview");
+    cordovaWebView.loadUrl(cordovaWebView.getUrl());
+   }
+   else {
+    Log.w(LOG_TAG, "Couldn't reload Cordova webview");
+   }
    
    // Dismiss progress dialog.
    mProgressDialog.dismiss ();

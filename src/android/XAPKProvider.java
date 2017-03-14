@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class XAPKProvider extends ContentProvider {
  public static final String COMPRESSEDLEN   = "ZCOL";
  public static final String UNCOMPRESSEDLEN = "ZUNL";
  public static final String COMPRESSIONTYPE = "ZTYP";
+ private static final String LOG_TAG = "XAPKDownloader";
  
  public static final String[] ALL_FIELDS = {
   FILEID,
@@ -93,14 +95,21 @@ public class XAPKProvider extends ContentProvider {
  }
  
  public boolean initIfNecessary () {
-  if (xmlDataReceived == false) return false;
-  if (mInit) return true;
+  if (xmlDataReceived == false) {
+   Log.e(LOG_TAG, "Could not init provider because XML data hasn't been loaded");
+   return false;
+  }
+  if (mInit) {
+   return true;
+  }
   Context ctx = getContext ();
   try {
    mAPKExtensionFile = XAPKExpansionSupport.getAPKExpansionZipFile (ctx, mainFileVersion, patchFileVersion);
    mInit = true;
+   Log.v(LOG_TAG, "Successfully init'ed provider.");
    return true;
   } catch (IOException e) {
+   Log.w(LOG_TAG, "Could not open expansion ZIP file");
    e.printStackTrace ();
   }
   return false;
