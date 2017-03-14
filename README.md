@@ -115,23 +115,24 @@ The plugin provides the following variables, which you can set in your app's `co
   - **XAPK_TEXT_ERROR**: "Error."
   - **XAPK_TEXT_CLOSE**: "Close." (as in close a window)
   
-  ...there are a few others that in almost every case you don't need to worry about setting, as the defaults should be just fine:
-- **XAPK_MAIN_VERSION**: The version number for your "main" expansion file.
-  - *Default:*: 0: Indicates that the app should use the first file it finds in the expansion directory that has a name starting with "main".
+There are a few others that in almost every case you don't need to worry about setting, as the defaults should be just fine:
+
+- **XAPK_MAIN_VERSION**: The [version number][3] for your "main" expansion file.
+  - *Default:*: 0: Indicates that the app should use the first file it finds in the expansion directory that has a name starting with "main". (Google Play tries to ensure that you will never have more than one `main` and one `patch` file, so usually you don't need to worry about checking that their version numbers are correct.)
   - *If provided*: If not 0, the plugin will only use an expansion file with this version number.
 - **XAPK_MAIN_FILESIZE**: The size (in bytes) of your "main" expansion file.
-  - *Default:* 0. A value of 0 indicates that we should skip the size check
+  - *Default:* 0. A value of 0 indicates that we should skip the size check.
   - *Optional:* -1. A value of -1 indicates that you're not using a "main" file. The plugin won't look for it, read from it, or complain about its absence.
   - *If provided*: If not 0 or -1, the plugin will verify that the file on the phone is this size, and will delete and re-download it if it's the wrong size.
-- **XAPK_PATCH_VERSION**: The version number for your "patch" expansion file. Same behavior and options as XAPK_MAIN_VERSION.
-- **XAPK_PATCH_FILESIZE**: The size (in bytes) of your "patch" expansion file. Same behavior and options as XAPK_MAIN_FILESIZE.
+- **XAPK_PATCH_VERSION**: The version number for your "patch" expansion file. Same behavior and options as `XAPK_MAIN_VERSION`.
+- **XAPK_PATCH_FILESIZE**: The size (in bytes) of your "patch" expansion file. Same behavior and options as `XAPK_MAIN_FILESIZE`.
   - *Default:* True
 
 **Note:** Cordova does not seem to automatically propagate changes to these variables into the compiled app. So when you update one of these, you'll need to either manually edit the file `plugins/android.json` with the new value, or (if you've saved all your settings into your `config.xml` file) remove and re-add the plugin using `cordova plugin rm` and `cordova plugin add`.
 
 [1]: https://developer.android.com/google/play/licensing/setting-up.html
 [2]: https://developer.android.com/guide/topics/providers/content-provider-basics.html#ContentURIs
-
+[3]: https://developer.android.com/google/play/expansion-files.html#Filename
 
 # Usage
 
@@ -143,11 +144,11 @@ In Ubuntu Linux, you can generate a non-compressed zip file by adding the `-0` f
 
 In Windows, I use 7zip, which shows "version 20" in the file properties. (Some zip programs may generate zips that, when uploaded to the Google Play Developer Console, come back as corrupt OBBs...)
 
-(You may ask, why use a ZIP file if it's not compressed? The reason is that Google requires us to use just one file, hence a ZIP. Leaving it uncompressed lets us quickly read from it, and since most media formats are already compressed, compression is unnecessary anyway.)
+(You may ask, why use a ZIP file if it's not compressed? The reason is that Google requires us to upload just one file, hence we need to combine all our expansion contents into one archive file. Leaving the archive uncompressed lets us quickly read from it. And since most media file formats are already compressed, compressing the archive is unnecessary anyway.)
 
-Google doesn't care what name you give the file when you upload it. When the file is downloaded onto the user's device it will be [automatically renamed][3] to `[main|patch].<expansion-version>.<package-name>.obb]`; e.g.: `main.18009.org.example.mycordova.obb`. Hence, these are called **OBB files**.
+Google doesn't care what name you give the file when you upload it. Once uploaded to Google Play, it will be [automatically renamed][4] to `[main|patch].<current-apk-version>.<package-name>.obb]`; e.g.: `main.18009.org.example.mycordova.obb`. Hence, these are called **OBB files**.
 
-[3]: https://developer.android.com/google/play/expansion-files.html#Filename
+[4]: https://developer.android.com/google/play/expansion-files.html#Filename
 
 
 ### Main & Patch files
@@ -155,21 +156,6 @@ Google doesn't care what name you give the file when you upload it. When the fil
 Google allows you to provide two expansion files, which it refers to as the `main` file and `patch` file. You're free to use these however you want, but the recommended pattern is that you start with a big `main` expansion file in your first release. Then, if there's a subsequent release where you need to change just one of the many files archived in `main`, you can upload a `patch` file that contains *only* that one changed file (and leave `main` unchanged). Then your users will have only that small download for their next upgrade, instead of having to download a whole big `main` file again.
 
 This plugin helps you to do that, by preferring files in `patch` over files in `main`. That is, if you have a file `pics/kitten.jpg` in your `main` and your `patch`, the plugin will use the `kitten.jpg` from `patch` and ignore the one in `main`.
-
-
-### Expansion file version numbers
-
-To quote [the Google docs](https://developer.android.com/google/play/expansion-files.html#Filename):
-
->This is an integer that matches the version code of the APK with which the expansion is first associated (it matches the application's android:versionCode value).
->
->"First" is emphasized because although the Developer Console allows you to re-use an uploaded expansion file with a new APK, the expansion file's name does not change--it retains the version applied to it when you first uploaded the file.
-
-So, when you first add an Expansion file to your app, you should make the file version numbers (in `XAPK_MAIN_VERSION` or `XAPK_PATCH_VERSION`) match the Android build number (the `android-versionCode` attribute of `config.xml`'s `widget` tag.)
-
-On subsequent updates to your app if none of the expansion content changes, then you don't need to update the expansion version number or upload a new copy of the expansion file to Google Play. (Though in Google Play, you may need to indicate that the app is using this particular expansion file.)
-
-When your expansion file does change, then you'll need to bump the Android build number, update the file's version number to match, and upload the new file to Google Play along with a new APK.
 
 
 ## In Cordova
