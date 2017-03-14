@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Messenger;
 import android.content.pm.Signature;
@@ -187,16 +188,33 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   if (newState == STATE_COMPLETED) {
    Log.v(LOG_TAG, "Download complete");
    mProgressDialog.setMessage (xmlData.getString("xapk_text_preparing_assets", ""));
+
+  if (xmlData != null) {
+   Log.v(LOG_TAG, "Starting up expansion authority.");
+   String expansionAuthority = xmlData.getString("xapk_expansion_authority");
+   this.getApplicationContext().getContentResolver().call(
+    Uri.parse("content://" + expansionAuthority),
+    "download_completed",
+    null,
+    null
+   );
+
+   // Now that we've started up the expansion authority, 
+   // we need to reload the webview (if it's still open), in case
+   // it's already displaying some images from the expansion as broken
+   // image links.
    if (cordovaWebView != null) {
-    // We need to reload the webview (if it's still open), in case
-    // it's already displaying some images from the expansion, as broken
-    // image links.
     Log.v(LOG_TAG, "Reloading Cordova webview");
     cordovaWebView.loadUrl(cordovaWebView.getUrl());
    }
    else {
     Log.w(LOG_TAG, "Couldn't reload Cordova webview");
    }
+
+  } else {
+   Log.e (LOG_TAG, "Couldn't start expansion authority.");
+  }
+
    
    // Dismiss progress dialog.
    mProgressDialog.dismiss ();
