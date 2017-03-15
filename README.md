@@ -12,7 +12,6 @@ Table of Contents
 - [Usage](#usage)
   - [Expansion Files (OBB Files)](#expansion-files-obb-files)
     - [Main & Patch files](#main--patch-files)
-    - [Expansion file version numbers](#expansion-file-version-numbers)
   - [In Cordova](#in-cordova)
   - [Testing](#testing)
   - [Cross-platform support](#Cross-platform-support)
