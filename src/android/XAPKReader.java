@@ -42,7 +42,8 @@ public class XAPKReader extends CordovaPlugin {
             {"xapk_text_error", "string"},
             {"xapk_text_close", "string"},
             {"xapk_google_play_public_key", "string"},
-            {"xapk_auto_download", "bool"}
+            {"xapk_auto_download", "bool"},
+            {"xapk_progress_format", "string"}
         };
         int curlen = xmlData.length;
         for (int i = 0; i < curlen; i++) {

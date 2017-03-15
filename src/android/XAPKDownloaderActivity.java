@@ -43,6 +43,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private Bundle xmlData;
  private int[] versionList = new int[2];
  private long[] fileSizeList = new long[2];
+ private boolean progressInMB = false;
  
  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
  public static Activity cordovaActivity = null;
@@ -91,6 +92,10 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   versionList[1] = this.getIntent().getIntExtra ("xapk_patch_version" , 0);
   fileSizeList[0] = this.getIntent().getLongExtra("xapk_main_file_size" , 0L);
   fileSizeList[1] = this.getIntent().getLongExtra("xapk_patch_file_size", 0L);
+  String progressFormat = this.getIntent().getStringExtra("xapk_progress_format");
+  if (progressFormat != null && progressFormat.toLowerCase().equals("megabytes")) {
+   this.progressInMB = true;
+  }
   
   // Check if both expansion files are already available and downloaded before going any further.
   if (allExpansionFilesKnownAsDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
@@ -131,19 +136,25 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    mProgressDialog.setProgressStyle (ProgressDialog.STYLE_HORIZONTAL);
    mProgressDialog.setMessage (xmlData.getString("xapk_text_downloading_assets", ""));
    mProgressDialog.setCancelable (false);
-   int max = 0;
-   for (int i = 0; i < fileSizeList.length; i++) {
-    if (fileSizeList[i] > 0) {
-     max += fileSizeList[i];
+
+   // Setup for displaying progress in MB (instead of default, percentage)
+   if (progressInMB) {
+    // Initial guess at file size to download. This will probably be incorrect unless you're
+    // using XAPK_MAIN_SIZE and XAPK_PATCH_SIZE, but we'll update it when we get the first
+    // progress callback from the downloader.
+    int totalMB = 0;
+    for (int i = 0; i < fileSizeList.length; i++) {
+     if (fileSizeList[i] > 0) {
+      totalMB += fileSizeList[i];
+     }
     }
-   }
-   if (max > 0) {
     mProgressDialog.setMax((int) (fileSizeList[0] / 1024 / 1024));
+    mProgressDialog.setProgressNumberFormat("%1dMB / %2dMB");
    }
-   mProgressDialog.setProgressNumberFormat("%1dMB /%2dMB");
+
    mProgressDialog.show ();
    return;
-   
+
   } catch (NameNotFoundException e) {
    Log.e (LOG_TAG, "Cannot find own package! MAYDAY!");
    e.printStackTrace ();
@@ -180,12 +191,21 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  }
  
  @Override public void onDownloadProgress (DownloadProgressInfo progress) {
-  long percents = progress.mOverallProgress * 100 / progress.mOverallTotal;
-  Log.v (LOG_TAG, "DownloadProgress: " + Long.toString(percents) + "%");
-  mProgressDialog.setProgress((int) progress.mOverallProgress / 1024 / 1024);
-  int max = (int) progress.mOverallTotal / 1024 / 1024;
-  if (mProgressDialog.getMax() != max) {
-   mProgressDialog.setMax(max);
+  if (progressInMB) {
+   int progressMB = (int) progress.mOverallProgress / 1024 / 1024;
+   Log.v (LOG_TAG, "DownloadProgress: " + Integer.toString(progressMB) + " MB");
+   mProgressDialog.setProgress(progressMB);
+   int totalMB = (int) progress.mOverallTotal / 1024 / 1024;
+   // Make sure the dialogue shows the correct file size, as obtained from the downloader.
+   // (Our initial max size is based on the project's config, and is likely incorrect.)
+   if (mProgressDialog.getMax() != totalMB) {
+    mProgressDialog.setMax(totalMB);
+   }
+
+  } else {
+   long percents = progress.mOverallProgress * 100 / progress.mOverallTotal;
+   Log.v (LOG_TAG, "DownloadProgress: " + Long.toString(percents) + "%");
+   mProgressDialog.setProgress((int) percents);
   }
  }
 
