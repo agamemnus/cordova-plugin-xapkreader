@@ -96,7 +96,7 @@ cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#co
 
 To specify the two or more variables at once (for example, `XAPK_PUBLIC_KEY` and `XAPK_EXPANSION_AUTHORITY`), the command looks like this:
 ```
-cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-6.5.0 --variable XAPK_PUBLIC_KEY="YOUR_GOOGLE_PLAY_LICENSE_KEY --variable XAPK_EXPANSION_AUTHORITY="com.expansion_authority"
+cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#cordova-6.5.0 --variable XAPK_PUBLIC_KEY="YOUR_GOOGLE_PLAY_LICENSE_KEY" --variable XAPK_EXPANSION_AUTHORITY="com.expansion_authority"
 ```
 
 ## Plugin Config Variables
