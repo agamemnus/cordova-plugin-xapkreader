@@ -6,13 +6,18 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
+import org.apache.cordova.LOG;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.net.Uri;
+import android.Manifest;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 
 public class XAPKReader extends CordovaPlugin {
     public static final String ACTION_DOWNLOAD_IF_AVAIlABLE = "downloadExpansionIfAvailable";
@@ -20,6 +25,10 @@ public class XAPKReader extends CordovaPlugin {
     private CordovaInterface cordova;
     private CordovaWebView webView;
     private Bundle bundle;
+
+    private static final String LOG_TAG = "XAPKReader";
+    public static final String STORAGE_PERM = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+    public static final int STORAGE_REQ_CODE = 0;
 
     @Override
     public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
@@ -83,6 +92,19 @@ public class XAPKReader extends CordovaPlugin {
         super.initialize(cordova, webView);
     }
 
+    public void onRequestPermissionResult(int requestCode, String[] permissions,
+                                          int[] grantResults) throws JSONException {
+        for (int r : grantResults) {
+            if (r == PackageManager.PERMISSION_DENIED) {
+                LOG.d(LOG_TAG, "Permission Denied!");
+                return;
+            }
+
+        }
+        LOG.d(LOG_TAG, "Permission granted!");
+        startDownloadExpansionIfAvailable();
+    }
+
     @Override
     public boolean execute(final String action, final JSONArray args, final CallbackContext callContext) {
         try {
@@ -111,7 +133,7 @@ public class XAPKReader extends CordovaPlugin {
     }
 
 
-    private void downloadExpansionIfAvailable() {
+    private void startDownloadExpansionIfAvailable() {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -125,5 +147,16 @@ public class XAPKReader extends CordovaPlugin {
                 cordova.getActivity().startActivity(intent);
             }
         });
+    }
+
+    private void downloadExpansionIfAvailable() {
+        if( cordova.hasPermission(STORAGE_PERM) ) {
+            LOG.d( LOG_TAG, "has storage permission already" );
+            startDownloadExpansionIfAvailable();
+        }
+        else {
+            LOG.d( LOG_TAG, "requesting storage permission" );
+            cordova.requestPermission( this, STORAGE_REQ_CODE, STORAGE_PERM );
+        }
     }
 }
