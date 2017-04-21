@@ -13,6 +13,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.net.Uri;
 import org.json.JSONArray;
+import android.content.pm.PackageManager;
+import android.Manifest;
+import android.os.Build;
+import org.json.JSONException;
 
 public class XAPKReader extends CordovaPlugin {
     public static final String ACTION_DOWNLOAD_IF_AVAIlABLE = "downloadExpansionIfAvailable";
@@ -21,8 +25,12 @@ public class XAPKReader extends CordovaPlugin {
     private CordovaWebView webView;
     private Bundle bundle;
 
+    // Request code used when we do runtime permissions requests during initialization.
+    public static final int STARTUP_REQ_CODE = 0;
+
     @Override
     public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
+
         this.cordova = cordova;
         this.webView = webView;
         this.bundle = new Bundle();
@@ -75,12 +83,29 @@ public class XAPKReader extends CordovaPlugin {
         // Set the public key.
         XAPKDownloaderService.BASE64_PUBLIC_KEY = bundle.getString("xapk_google_play_public_key", "");
 
-        boolean autoDownload = bundle.getBoolean("xapk_auto_download", true);
-        if (autoDownload) {
-            downloadExpansionIfAvailable();
+        // Workaround for Android 6 bug wherein downloaded OBB files have the wrong file permissions
+        // and require WRITE_EXTERNAL_STORAGE permission
+        if (
+                Build.VERSION.SDK_INT == 23
+                && !cordova.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        ) {
+            // We need the permission; so request it (asynchronously, callback is onRequestPermissionsResult)
+            cordova.requestPermission(this, STARTUP_REQ_CODE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        } else {
+            // We don't need the permission, or we already have it.
+            this.autodownloadIfNecessary();
         }
 
         super.initialize(cordova, webView);
+    }
+
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
+        for (int r:grantResults) {
+            // They granted us WRITE_EXTERNAL_STORAGE (and thus, implicitly, READ_EXTERNAL_STORAGE) permission
+            if (requestCode == STARTUP_REQ_CODE && r == PackageManager.PERMISSION_GRANTED) {
+                this.autodownloadIfNecessary();
+            }
+        }
     }
 
     @Override
@@ -110,6 +135,12 @@ public class XAPKReader extends CordovaPlugin {
         }
     }
 
+    private void autodownloadIfNecessary() {
+        boolean autoDownload = bundle.getBoolean("xapk_auto_download", true);
+        if (autoDownload) {
+            downloadExpansionIfAvailable();
+        }
+    }
 
     private void downloadExpansionIfAvailable() {
         cordova.getActivity().runOnUiThread(new Runnable() {
