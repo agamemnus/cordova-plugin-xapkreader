@@ -50,7 +50,6 @@ public class XAPKReader extends CordovaPlugin {
             {"xapk_text_error", "string"},
             {"xapk_text_close", "string"},
             {"xapk_google_play_public_key", "string"},
-            {"xapk_auto_download", "bool"},
             {"xapk_progress_format", "string"}
         };
         int curlen = xmlData.length;
@@ -92,21 +91,9 @@ public class XAPKReader extends CordovaPlugin {
         ) {
             // We need the permission; so request it (asynchronously, callback is onRequestPermissionsResult)
             cordova.requestPermission(this, STARTUP_REQ_CODE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        } else {
-            // We don't need the permission, or we already have it.
-            this.autodownloadIfNecessary();
         }
 
         super.initialize(cordova, webView);
-    }
-
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
-        for (int r:grantResults) {
-            // They granted us WRITE_EXTERNAL_STORAGE (and thus, implicitly, READ_EXTERNAL_STORAGE) permission
-            if (requestCode == STARTUP_REQ_CODE && r == PackageManager.PERMISSION_GRANTED) {
-                this.autodownloadIfNecessary();
-            }
-        }
     }
 
     @Override
@@ -133,13 +120,6 @@ public class XAPKReader extends CordovaPlugin {
 
             callContext.sendPluginResult(result);
             return true;
-        }
-    }
-
-    private void autodownloadIfNecessary() {
-        boolean autoDownload = bundle.getBoolean("xapk_auto_download", true);
-        if (autoDownload) {
-            downloadExpansionIfAvailable();
         }
     }
 

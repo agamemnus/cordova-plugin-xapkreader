@@ -6,15 +6,15 @@
  <license>MIT (see readme.md)</license>
  <keywords>cordova,apk,expansion,file,xapk,expansion file reader,xapk reader,xapkreader,android,agamemnus,flyingsoftgames</keywords>
  <engines><engine name="cordova" version=">=4.1.1" /></engines>
- 
+
  <platform name="android">
- 
+
   <framework src="com.google.android.gms:play-services-base:+" />
- 
+
   <js-module src="www/XAPKReader.js" name="XAPKReader">
    <clobbers target="XAPKReader"/>
   </js-module>
-  
+
   <config-file target="res/xml/config.xml" parent="/*">
    <feature name="XAPKReader">
     <param name="android-package" value="com.flyingsoftgames.xapkreader.XAPKReader"/>
@@ -33,7 +33,6 @@
   <preference name="XAPK_PATCH_VERSION" default="0" />
   <preference name="XAPK_MAIN_FILESIZE" default="0" />
   <preference name="XAPK_PATCH_FILESIZE" default="0" />
-  <preference name="XAPK_AUTO_DOWNLOAD" default="true" />
   <preference name="XAPK_PROGRESS_FORMAT" default="percent" />
 
   <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
@@ -49,10 +48,9 @@
    <integer name="xapk_patch_version">$XAPK_PATCH_VERSION</integer>
    <integer name="xapk_main_file_size">$XAPK_MAIN_FILESIZE</integer>
    <integer name="xapk_patch_file_size">$XAPK_PATCH_FILESIZE</integer>
-   <bool name="xapk_auto_download">$XAPK_AUTO_DOWNLOAD</bool>
    <string name="xapk_progress_format">$XAPK_PROGRESS_FORMAT</string>
   </config-file>
-  
+
   <source-file src="src/android/XAPKAlarmReceiver.java"      target-dir="src/com/flyingsoftgames/xapkreader" />
   <source-file src="src/android/XAPKDownloaderActivity.java" target-dir="src/com/flyingsoftgames/xapkreader" />
   <source-file src="src/android/XAPKDownloaderService.java"  target-dir="src/com/flyingsoftgames/xapkreader" />
@@ -60,10 +58,10 @@
   <source-file src="src/android/XAPKProvider.java"           target-dir="src/com/flyingsoftgames/xapkreader" />
   <source-file src="src/android/XAPKReader.java"             target-dir="src/com/flyingsoftgames/xapkreader" />
   <source-file src="src/android/XAPKZipResourceFile.java"    target-dir="src/com/flyingsoftgames/xapkreader" />
-  
+
   <framework src="android-sdk/extras/google/play_apk_expansion/downloader_library" custom="true"/>
   <framework src="android-sdk/extras/google/play_licensing/library" custom="true" />
-  
+
   <config-file target="AndroidManifest.xml" parent="/manifest">
    <!-- Required to download files from Google Play -->
    <uses-permission android:name="android.permission.INTERNET" />
@@ -78,7 +76,7 @@
    <!-- Required to access Google Play Licensing -->
    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
   </config-file>
-  
+
   <config-file target="AndroidManifest.xml" parent="application">
    <activity android:name="com.flyingsoftgames.xapkreader.XAPKDownloaderActivity" android:label="@string/app_name" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
    </activity>
@@ -86,8 +84,8 @@
    <receiver android:name="com.flyingsoftgames.xapkreader.XAPKAlarmReceiver" />
    <provider android:authorities="@string/xapk_expansion_authority" android:exported="false" android:multiprocess="true" android:name="com.flyingsoftgames.xapkreader.XAPKProvider" />
   </config-file>
-  
+
   <info> See the README.md file to complete your installation.</info>
-  
+
  </platform>
 </plugin>
