@@ -16,7 +16,6 @@ Table of Contents
   - [Testing](#testing)
   - [Cross-platform support](#Cross-platform-support)
 - [Tips](#tips)
-- [Compatibility with cordova-plugin-splashscreen](#compatibility-with-cordova-plugin-splashscreen)
 - [License](#license)
 
 # Version
@@ -101,6 +100,23 @@ cordova plugin add https://github.com/agamemnus/cordova-plugin-xapkreader.git#co
 
 ## Plugin Config Variables
 
+The plugin provides the following variables, which you can set in your app's `config.xml` file, or by adding the `--variable` flag (per variable, as above) to `cordova plugin add`.
+
+- **XAPK_PUBLIC_KEY (Required)**: The [Services & APIs public key][1] from your Google Play developer account. Google requires the app to provide this in order to download the expansion files from its servers.
+- **XAPK_EXPANSION_AUTHORITY (Highly recommended)**: The [URI "authority"][2] string the plugin should use. This provides an easy way for you to access your expansion files' contents via URLs in the Cordova app. This name must be unique, so it's recommended to match your app's package name, or at least start with it, e.g. "org.example.mycordova" or "org.example.mycordova.expansion". **Any other app may access this data**: you can actually share data between apps that use the same url/expansion authority!
+  - *Default:* The package name of your app (e.g. the "id" attribute in your config.xml's "widget" tag).
+- **XAPK_PROGRESS_FORMAT**: Controls the formatting of the download progress dialogue. Recognized values are `percent` (show percentage downloaded) and `megabytes` (show number of megabytes downloaded, out of total).
+  - *Default:* `percent`
+- *Text strings*: The following variables are text strings that are displayed to the user as part of the plugin's user interface. They're exposed as variables in case you want to translate or change them.
+  - **XAPK_TEXT_DL_ASSETS**: "Downloading assets..."
+  - **XAPK_TEXT_PR_ASSETS**: "Preparing assets..."
+  - **XAPK_TEXT_DL_FAILED**: "Download failed."
+  - **XAPK_TEXT_ERROR**: "Error."
+  - **XAPK_TEXT_CLOSE**: "Close." (as in close a window)
+
+There are a few others that in almost every case you don't need to worry about setting, as the defaults should be just fine:
+
+- **XAPK_MAIN_VERSION**: The [version number][3] for your "main" expansion file.
   - *Default:*: 0: Indicates that the app should use the first file it finds in the expansion directory that has a name starting with "main". (Google Play tries to ensure that you will never have more than one `main` and one `patch` file, so usually you don't need to worry about checking that their version numbers are correct.)
   - *If provided*: If not 0, the plugin will only use an expansion file with this version number.
 - **XAPK_MAIN_FILESIZE**: The size (in bytes) of your "main" expansion file.
