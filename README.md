@@ -16,7 +16,6 @@ Table of Contents
   - [Testing](#testing)
   - [Cross-platform support](#Cross-platform-support)
 - [Tips](#tips)
-- [Compatibility with cordova-plugin-splashscreen](#compatibility-with-cordova-plugin-splashscreen)
 - [License](#license)
 
 # Version
@@ -106,7 +105,6 @@ The plugin provides the following variables, which you can set in your app's `co
 - **XAPK_PUBLIC_KEY (Required)**: The [Services & APIs public key][1] from your Google Play developer account. Google requires the app to provide this in order to download the expansion files from its servers.
 - **XAPK_EXPANSION_AUTHORITY (Highly recommended)**: The [URI "authority"][2] string the plugin should use. This provides an easy way for you to access your expansion files' contents via URLs in the Cordova app. This name must be unique, so it's recommended to match your app's package name, or at least start with it, e.g. "org.example.mycordova" or "org.example.mycordova.expansion". **Any other app may access this data**: you can actually share data between apps that use the same url/expansion authority!
   - *Default:* The package name of your app (e.g. the "id" attribute in your config.xml's "widget" tag).
-- **XAPK_AUTO_DOWNLOAD**: Controls whether or not the plugin starts downloading automatically when the app launches. If true, the plugin will take over the app's UI with its downloader immediately upon launch, if files need to be downloaded. If false, your Cordova app will need to tell the plugin to initiate the Downloader. See [Compatibility with cordova-plugin-splashscreen](#Compatibility with cordova-plugin-splashscreen)
 - **XAPK_PROGRESS_FORMAT**: Controls the formatting of the download progress dialogue. Recognized values are `percent` (show percentage downloaded) and `megabytes` (show number of megabytes downloaded, out of total).
   - *Default:* `percent`
 - *Text strings*: The following variables are text strings that are displayed to the user as part of the plugin's user interface. They're exposed as variables in case you want to translate or change them.
@@ -115,7 +113,7 @@ The plugin provides the following variables, which you can set in your app's `co
   - **XAPK_TEXT_DL_FAILED**: "Download failed."
   - **XAPK_TEXT_ERROR**: "Error."
   - **XAPK_TEXT_CLOSE**: "Close." (as in close a window)
-  
+
 There are a few others that in almost every case you don't need to worry about setting, as the defaults should be just fine:
 
 - **XAPK_MAIN_VERSION**: The [version number][3] for your "main" expansion file.
@@ -139,7 +137,7 @@ There are a few others that in almost every case you don't need to worry about s
 
 ## Expansion files (OBB files)
 
-The expansion file should be a non-compressed ZIP file (also known as a "STOR" or "store"). That is, a ZIP file with 0% compression. Your ZIP file *can* include a directory structure, which can help to keep the files organized. 
+The expansion file should be a non-compressed ZIP file (also known as a "STOR" or "store"). That is, a ZIP file with 0% compression. Your ZIP file *can* include a directory structure, which can help to keep the files organized.
 
 In Ubuntu Linux, you can generate a non-compressed zip file by adding the `-0` flag to the standard CLI `zip` command.
 
@@ -162,7 +160,7 @@ This plugin helps you to do that, by preferring files in `patch` over files in `
 ## In Cordova
 
 Remember that expansion authority URI you set up in `XAPK_EXPANSION_AUTHORITY`? You can reference your expansion files from within your Cordova app, using an [Android Content URI][1] which includes your expansion authority string.
- 
+
 ```html
 <img src="content://org.example.mycordova/myfile.png">
 ```
@@ -190,24 +188,6 @@ Note that if your app is cross-platform (and that's a big part of Cordova's appe
 * If you **manually rename** the main or patch file on your device while the app is running, the .obb (zip) file <--> URI mappings will break because the plugin won't run and remap every time you open the app. If you reinstall, the device will rename the files.
 
 * If you upload a new main or patch APK expansion file to Google Play, the old main or patch file will be deleted when Google Play updates the user's device.
-
-
-# Compatibility with cordova-plugin-splashscreen
-If you are using `cordova-plugin-splashscreen`, by default this plugin will prevent your splash screen from appearing on Android.  This is because `cordova-plugin-splashscreen` is wired to automatically hide the splash screen after receiving a pause event.  When this plugin activates the download activity, the pause event is fired, and the splash screen is hidden.
-   
-To avoid this behavior, you'll want to set `XAPK_AUTO_DOWNLOAD` to `false` and invoke the plugin explicitly within your Javascript code by calling `XAPKReader.downloadExpansionIfAvailable`. Add the following in your javascript code at the earliest point where you know the splash page has been removed (either by explicitly hiding it or based on the timeout you set for the splashpage).
-
-```javascript
-    // XAPKReader will only be defined (and should only be invoked) for the Android platform
-    if (window.XAPKReader) {
-      window.XAPKReader.downloadExpansionIfAvailable(function () {
-        console.log("Expansion file check/download success.");
-      }, function (err) {
-        console.log(err);
-        throw "Failed to download expansion file.";
-      })
-    }
-```
 
 # License
 (for any non-Android SDK parts...)
