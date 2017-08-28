@@ -19,6 +19,7 @@ import android.provider.BaseColumns;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.net.URLConnection;
 
 public class XAPKProvider extends ContentProvider {
  private XAPKZipResourceFile mAPKExtensionFile;
@@ -66,7 +67,7 @@ public class XAPKProvider extends ContentProvider {
  
  @Override public int delete (Uri arg0, String arg1, String[] arg2) {return 0;}
 
- @Override public String getType (Uri uri) {return "vnd.android.cursor.item/asset";}
+ @Override public String getType (Uri uri) {return URLConnection.guessContentTypeFromName(uri.toString());}
 
  @Override public Uri insert (Uri uri, ContentValues values) {return null;}
  
