@@ -51,6 +51,7 @@ public class XAPKReader extends CordovaPlugin {
             {"xapk_text_close", "string"},
             {"xapk_google_play_public_key", "string"},
             {"xapk_auto_download", "bool"},
+            {"xapk_auto_permission", "bool"},
             {"xapk_auto_reload", "bool"},
             {"xapk_progress_format", "string"}
         };
@@ -87,8 +88,10 @@ public class XAPKReader extends CordovaPlugin {
 
         // Workaround for Android 6 bug wherein downloaded OBB files have the wrong file permissions
         // and require WRITE_EXTERNAL_STORAGE permission
+        boolean autoPermission = bundle.getBoolean("xapk_auto_permission", true);
         if (
-                Build.VERSION.SDK_INT >= 23
+                autoPermission
+                && Build.VERSION.SDK_INT >= 23
                 && !cordova.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         ) {
             // We need the permission; so request it (asynchronously, callback is onRequestPermissionsResult)

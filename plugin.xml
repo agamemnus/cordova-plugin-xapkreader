@@ -34,6 +34,7 @@
   <preference name="XAPK_MAIN_FILESIZE" default="0" />
   <preference name="XAPK_PATCH_FILESIZE" default="0" />
   <preference name="XAPK_AUTO_DOWNLOAD" default="true" />
+  <preference name="XAPK_AUTO_PERMISSION" default="false" />
   <preference name="XAPK_AUTO_RELOAD" default="false" />
   <preference name="XAPK_PROGRESS_FORMAT" default="percent" />
 
@@ -51,6 +52,7 @@
    <integer name="xapk_main_file_size">$XAPK_MAIN_FILESIZE</integer>
    <integer name="xapk_patch_file_size">$XAPK_PATCH_FILESIZE</integer>
    <bool name="xapk_auto_download">$XAPK_AUTO_DOWNLOAD</bool>
+   <bool name="xapk_auto_permission">$XAPK_AUTO_PERMISSION</bool>
    <bool name="xapk_auto_reload">$XAPK_AUTO_RELOAD</bool>
    <string name="xapk_progress_format">$XAPK_PROGRESS_FORMAT</string>
   </config-file>
