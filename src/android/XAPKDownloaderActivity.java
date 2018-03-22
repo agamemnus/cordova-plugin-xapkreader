@@ -14,6 +14,7 @@ import android.os.Messenger;
 import android.content.pm.Signature;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageInfo;
+import android.support.v4.content.LocalBroadcastManager;
 
 // <Workaround for Cordova/Crosswalk flickering status bar bug./>
 import android.view.WindowManager;
@@ -44,7 +45,9 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private int[] versionList = new int[2];
  private long[] fileSizeList = new long[2];
  private boolean progressInMB = false;
- 
+ private boolean autoReload = true;
+ private Bundle bundle;
+
  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
  public static Activity cordovaActivity = null;
  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
@@ -93,10 +96,15 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   fileSizeList[0] = this.getIntent().getLongExtra("xapk_main_file_size" , 0L);
   fileSizeList[1] = this.getIntent().getLongExtra("xapk_patch_file_size", 0L);
   String progressFormat = this.getIntent().getStringExtra("xapk_progress_format");
+  Boolean autoReload = this.getIntent().getBooleanExtra("xapk_auto_reload", true);
   if (progressFormat != null && progressFormat.toLowerCase().equals("megabytes")) {
    this.progressInMB = true;
   }
-  
+
+  if (autoReload != null) {
+   this.autoReload = autoReload;
+  }
+
   // Check if both expansion files are already available and downloaded before going any further.
   if (allExpansionFilesKnownAsDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
   
@@ -124,9 +132,17 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    // Start the download service, if required.
    Log.v (LOG_TAG, "Starting the download service.");
    int startResult = DownloaderClientMarshaller.startDownloadServiceIfRequired (this, pendingIntent, XAPKDownloaderService.class);
-   
-   if (startResult == DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED) {Log.v (LOG_TAG, "No download required."); finish (); return;}
-   
+
+   if (startResult == DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED) {
+    if ( !autoReload ) {
+      final Intent intent = new Intent("XAPK_Download_finished");
+      LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
+     }
+    Log.v (LOG_TAG, "No download required.");
+    finish ();
+    return;
+   }
+
    // If download has started, initialize activity to show progress.
    Log.v (LOG_TAG, "Initializing activity to show progress.");
    // Instantiate a member instance of IStub.
@@ -242,9 +258,19 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    // we need to reload the webview (if it's still open), in case
    // it's already displaying some images from the expansion as broken
    // image links.
-   if (cordovaWebView != null) {
+   if (
+    autoReload &&
+    cordovaWebView != null
+    ) {
     Log.v(LOG_TAG, "Reloading Cordova webview");
     cordovaWebView.loadUrl(cordovaWebView.getUrl());
+   }
+   else if (
+    !autoReload &&
+    cordovaWebView != null
+    ) {
+    final Intent intent = new Intent("XAPK_Download_finished");
+    LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
    }
    else {
     Log.w(LOG_TAG, "Couldn't reload Cordova webview");
