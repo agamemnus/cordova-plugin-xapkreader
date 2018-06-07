@@ -23,9 +23,8 @@ public class XAPKExpansionSupport {
   if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) return ret.toArray (new String[0]);
   
   // Build the full path to the app's expansion files.
-  File root = Environment.getExternalStorageDirectory ();
-  String expPathString = root.toString() + EXP_PATH + packageName;
-  File expPath = new File(expPathString);
+  File expPath = ctx.getObbDir();
+  String expPathString = expPath.getAbsolutePath();
   
   // Check that the expansion file path exists.
   if (!expPath.exists()) return ret.toArray (new String[0]);
