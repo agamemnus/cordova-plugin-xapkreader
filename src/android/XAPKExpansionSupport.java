@@ -60,6 +60,9 @@ public class XAPKExpansionSupport {
   File directory = new File (directoryName);
   ArrayList<String> files = new ArrayList<String>();
   File[] fileList = directory.listFiles();
+  if(fileList == null) {
+      return files;
+  }
   for (File file : fileList) {
    if (file.isFile()) {files.add (file.toString()); continue;}
   }
