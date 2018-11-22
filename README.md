@@ -195,7 +195,7 @@ Note that if your app is cross-platform (and that's a big part of Cordova's appe
 
 
 # Compatibility with cordova-plugin-splashscreen
-If you are using `cordova-plugin-splashscreen`, by default this plugin will prevent your splash screen from appearing on Android.  This is because `cordova-plugin-splashscreen` is wired to automatically hide the splash screen after receiving a pause event.  When this plugin activates the download activity, the pause event is fired, and the splash screen is hidden.
+If you are using `cordova-plugin-splashscreen`, this plugin will, by default, prevent your splash screen from appearing on Android.  This is because `cordova-plugin-splashscreen` is wired to automatically hide the splash screen after receiving a pause event. However, this xapkreader plugin fires a pause event when it activates the download test activity, and thus the splash screen is hidden.
    
 To avoid this behavior, you'll want to set `XAPK_AUTO_DOWNLOAD` to `false` and invoke the plugin explicitly within your Javascript code by calling `XAPKReader.downloadExpansionIfAvailable`. Add the following in your javascript code at the earliest point where you know the splash page has been removed (either by explicitly hiding it or based on the timeout you set for the splashpage).
 
@@ -216,7 +216,7 @@ To avoid this behavior, you'll want to set `XAPK_AUTO_DOWNLOAD` to `false` and i
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2017 Michael Romanovsky
+Copyright (c) 2014-2018 Michael Romanovsky
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
