@@ -28,8 +28,7 @@ public class XAPKReader extends CordovaPlugin {
     // Request code used when we do runtime permissions requests during initialization.
     public static final int STARTUP_REQ_CODE = 0;
 
-    @Override
-    public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
+    @Override public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
 
         this.cordova = cordova;
         this.webView = webView;
@@ -38,7 +37,7 @@ public class XAPKReader extends CordovaPlugin {
         String packageName = cordova.getActivity().getPackageName();
 
         // Get some data from the xapkreader.xml file.
-        String[][] xmlData = new String[][]{
+        String[][] xmlData = new String[][] {
             {"xapk_main_version", "integer"},
             {"xapk_patch_version", "integer"},
             {"xapk_main_file_size", "integer", "long"},
@@ -113,8 +112,7 @@ public class XAPKReader extends CordovaPlugin {
         }
     }
 
-    @Override
-    public boolean execute(final String action, final JSONArray args, final CallbackContext callContext) {
+    @Override public boolean execute(final String action, final JSONArray args, final CallbackContext callContext) {
         try {
             PluginResult result = null;
             boolean success = false;
@@ -142,18 +140,14 @@ public class XAPKReader extends CordovaPlugin {
 
     private void autodownloadIfNecessary() {
         boolean autoDownload = bundle.getBoolean("xapk_auto_download", true);
-        if (autoDownload) {
-            downloadExpansionIfAvailable();
-        }
+        if (autoDownload) downloadExpansionIfAvailable();
     }
 
     private void downloadExpansionIfAvailable() {
         cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 XAPKDownloaderActivity.cordovaActivity = cordova.getActivity(); // Workaround for Cordova/Crosswalk flickering status bar bug.
-                // Provide webview to Downloader Activity so it can trigger a page
-                // reload once the expansion is downloaded.
+                // Provide a webview to Downloader Activity so it can trigger a page reload once the expansion is downloaded.
                 XAPKDownloaderActivity.cordovaWebView = webView;
                 Context context = cordova.getActivity().getApplicationContext();
                 Intent intent = new Intent(context, XAPKDownloaderActivity.class);
