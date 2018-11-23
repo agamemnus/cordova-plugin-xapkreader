@@ -37,6 +37,7 @@
   <preference name="XAPK_AUTO_PERMISSION" default="false" />
   <preference name="XAPK_AUTO_RELOAD" default="false" />
   <preference name="XAPK_PROGRESS_FORMAT" default="percent" />
+  <preference name="XAPK_BASE_URI" default="http://localhost:8888">
 
   <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
@@ -55,6 +56,7 @@
    <bool name="xapk_auto_permission">$XAPK_AUTO_PERMISSION</bool>
    <bool name="xapk_auto_reload">$XAPK_AUTO_RELOAD</bool>
    <string name="xapk_progress_format">$XAPK_PROGRESS_FORMAT</string>
+   <string name="xapk_base_uri">$XAPK_BASE_URI</string>
   </config-file>
   
   <source-file src="src/android/XAPKAlarmReceiver.java"      target-dir="src/com/flyingsoftgames/xapkreader" />

@@ -52,7 +52,8 @@ public class XAPKReader extends CordovaPlugin {
             {"xapk_auto_download", "bool"},
             {"xapk_auto_permission", "bool"},
             {"xapk_auto_reload", "bool"},
-            {"xapk_progress_format", "string"}
+            {"xapk_progress_format", "string"},
+            {"xapk_base_uri", "string"}
         };
         int curlen = xmlData.length;
         for (int i = 0; i < curlen; i++) {
@@ -80,7 +81,8 @@ public class XAPKReader extends CordovaPlugin {
         // Send data to the ContentProvider instance.
         ContentResolver cr = cordova.getActivity().getApplicationContext().getContentResolver();
         String expansionAuthority = bundle.getString("xapk_expansion_authority", "");
-        cr.call(Uri.parse("content://" + expansionAuthority), "set_expansion_file_version_data", null, bundle);
+        String baseUri = bundle.getString("xapk_ui_uri", "");
+        cr.call(Uri.parse(baseUri), "set_expansion_file_version_data", null, bundle);
 
         // Set the public key.
         XAPKDownloaderService.BASE64_PUBLIC_KEY = bundle.getString("xapk_google_play_public_key", "");
