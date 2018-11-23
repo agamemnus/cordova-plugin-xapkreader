@@ -37,7 +37,7 @@
   <preference name="XAPK_AUTO_PERMISSION" default="false" />
   <preference name="XAPK_AUTO_RELOAD" default="false" />
   <preference name="XAPK_PROGRESS_FORMAT" default="percent" />
-  <preference name="XAPK_BASE_URI" default="http://localhost:8888">
+  <preference name="XAPK_BASE_URI" default="http://localhost:8888" />
 
   <source-file src="res/values/xapkreader.xml" target-dir="res/values" />
   <config-file target="res/values/xapkreader.xml" parent="/*">
