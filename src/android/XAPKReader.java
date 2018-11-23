@@ -80,7 +80,6 @@ public class XAPKReader extends CordovaPlugin {
 
         // Send data to the ContentProvider instance.
         ContentResolver cr = cordova.getActivity().getApplicationContext().getContentResolver();
-        String expansionAuthority = bundle.getString("xapk_expansion_authority", "");
         String baseUri = bundle.getString("xapk_ui_uri", "");
         cr.call(Uri.parse(baseUri), "set_expansion_file_version_data", null, bundle);
 
