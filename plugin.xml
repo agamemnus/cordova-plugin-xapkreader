@@ -67,8 +67,8 @@
   <source-file src="src/android/XAPKReader.java"             target-dir="src/com/flyingsoftgames/xapkreader" />
   <source-file src="src/android/XAPKZipResourceFile.java"    target-dir="src/com/flyingsoftgames/xapkreader" />
   
-  <framework src="android-sdk/extras/google/play-licensing/lvl_library/build.gradle" custom="true" type="gradleReference" />
-  <framework src="android-sdk/extras/google/play-apk-expansion/apkx_library" custom="true" />
+  <framework src="android-sdk/extras/google/play-licensing" custom="true" />
+  <framework src="android-sdk/extras/google/play-apk-expansion" custom="true" />
   
   <config-file target="AndroidManifest.xml" parent="/manifest">
    <!-- Required to download files from Google Play -->
