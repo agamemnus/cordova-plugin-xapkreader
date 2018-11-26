@@ -67,8 +67,8 @@
   <source-file src="src/android/XAPKReader.java"             target-dir="src/com/flyingsoftgames/xapkreader" />
   <source-file src="src/android/XAPKZipResourceFile.java"    target-dir="src/com/flyingsoftgames/xapkreader" />
   
-  <framework src="android-sdk/extras/google/market_licensing/library" custom="true" />
-  <framework src="android-sdk/extras/google/market_apk_expansion/downloader_library" custom="true" />
+  <framework src="com.github.bolein:better-licensing:1.5.0" />
+  <framework src="com.github.bolein.better-apk-expansion:downloader_library:5.0.3" />
   
   <config-file target="AndroidManifest.xml" parent="/manifest">
    <!-- Required to download files from Google Play -->
