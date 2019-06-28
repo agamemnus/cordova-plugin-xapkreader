@@ -47,6 +47,8 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  private boolean progressInMB = false;
  private boolean autoReload = true;
  private Bundle bundle;
+ private int flagFS = WindowManager.LayoutParams.FLAG_FULLSCREEN;
+ private int flagNFS = WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN;
 
  // <Workaround for Cordova/Crosswalk flickering status bar bug./>
  public static Activity cordovaActivity = null;
@@ -81,15 +83,11 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
  }
  
  @Override public void onCreate (Bundle savedInstanceState) {
-  
-  if (cordovaActivity != null) {
-   // <Workaround for Cordova/Crosswalk flickering status bar bug./>
-   cordovaActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-   cordovaActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-   // <Workaround for Cordova/Crosswalk flickering status bar bug./>
-  }
-  
   super.onCreate (savedInstanceState);
+
+  // We can't attempt downloading the files with a debug signature.
+  if (signatureIsDebug(this)) {Log.v (LOG_TAG, "Using debug signature: no download is possible."); finish (); return;}
+
   xmlData = getIntent().getExtras(); // savedInstanceState;
   versionList[0] = this.getIntent().getIntExtra ("xapk_main_version" , 0);
   versionList[1] = this.getIntent().getIntExtra ("xapk_patch_version" , 0);
@@ -106,7 +104,15 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
   }
 
   // Check if both expansion files are already available and downloaded before going any further.
-  if (allExpansionFilesKnownAsDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;} 
+  if (allExpansionFilesKnownAsDelivered(versionList, fileSizeList)) {Log.v (LOG_TAG, "Files are already present."); finish (); return;}
+
+  boolean forceNotFullScreen = (cordovaActivity.getWindow().getAttributes().flags & flagNFS) != 0;
+
+  if (cordovaActivity != null) {
+   // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+   setFullscreen(true);
+   // <Workaround for Cordova/Crosswalk flickering status bar bug./>
+  }
   
   // Download the expansion file(s).
   try {
@@ -126,9 +132,6 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    
    PendingIntent pendingIntent = PendingIntent.getActivity (this, 0, notifierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
    
-   // We can't attempt downloading the files with a debug signature.
-   if (signatureIsDebug(this)) {Log.v (LOG_TAG, "Using debug signature: no download is possible."); finish (); return;}
-   
    // Start the download service, if required.
    Log.v (LOG_TAG, "Starting the download service.");
    int startResult = DownloaderClientMarshaller.startDownloadServiceIfRequired (this, pendingIntent, XAPKDownloaderService.class);
@@ -139,6 +142,12 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
       LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
      }
     Log.v (LOG_TAG, "No download required.");
+
+    // If the app was not fullscreen but forced to be by the flickering status bar bug workaround, change it back
+    if (forceNotFullScreen != ((cordovaActivity.getWindow().getAttributes().flags & flagNFS) != 0)) {
+     setFullscreen(false);
+    }
+
     finish ();
     return;
    }
@@ -169,6 +178,12 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    }
 
    mProgressDialog.show ();
+
+   // If the app was not fullscreen but forced to be by the flickering status bar bug workaround, change it back
+   if (forceNotFullScreen != ((cordovaActivity.getWindow().getAttributes().flags & flagNFS) != 0)) {
+    setFullscreen(false);
+   }
+
    return;
 
   } catch (NameNotFoundException e) {
@@ -325,5 +340,15 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
    // The "isDebug" variable will remain false.
   }
   return isDebug;
+ }
+
+
+ // Set fullscreen mode on or off
+ private void setFullscreen(boolean fs) {
+  int off = (fs) ? flagNFS : flagFS;
+  int on = (fs) ? flagFS : flagNFS;
+
+  cordovaActivity.getWindow().clearFlags(off);
+  cordovaActivity.getWindow().setFlags(on, on);
  }
 }
